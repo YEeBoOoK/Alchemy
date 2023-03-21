@@ -48,6 +48,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
+<!-- Менюшка -->
 <header id="header">
     <?php
     NavBar::begin([
@@ -100,7 +101,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <div class="music-container">
     <!-- Музыка -->
-    <audio id="bg-music" src="/web/music.mp3" loop volume="0.25">
+    <audio id="audio" src="/web/music.mp3" loop autoplay volume="0.25">
         Тег audio не поддерживается вашим браузером. Необходимо обновить браузер!
     </audio>
     <!-- Кнопки -->
@@ -152,6 +153,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 playBtn.innerHTML = "<img src='/web/img/play.png'>";
             }
         });
+
+        audio.onloadedmetadata = function() { 
+        audio.currentTime = time; 
+        };
+
     </script>
 
 </footer>

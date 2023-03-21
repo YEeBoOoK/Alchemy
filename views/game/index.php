@@ -84,11 +84,11 @@ echo '
         <!-- Индикатор уровня -->
         <span id="level-indicator">
           <!-- Текущий -->
-          <span class="current">'.$level->id_level.'</span>
+          <span class="current">1</span>
           <!-- Текст уровня -->
           <span id="labelLevel">уровень из</span>
           <!-- Всего -->
-          <span class="total">4</span>
+          <span class="total">'.$level->id_level.'</span>
           <!-- <span class="caret">▾</span> -->
         </span>
         <!-- Стрелка вправа -->
@@ -109,10 +109,17 @@ echo '
             <h1 class="title">Алхимия CSS</h1>
         </div>';
     
-    // Выводим инструкции для каждого уровня
-    foreach ($levels as $level) {
-        echo '<div id="instructions">'.$level->instruction.'</div>';
-    }
+        $currentLevel = null;
+        foreach ($levels as $level) {
+            if ($level->id_level == $currentLevelId) {
+                $currentLevel = $level;
+                break;
+            }
+        }
+        
+        if ($currentLevel) {
+            echo '<div id="instructions">' . $currentLevel->instruction . '</div>';
+        }
 
     echo '
     <!--<div class="container-element">
