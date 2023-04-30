@@ -25,17 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_user',
+            // 'id_user',
             'email:email',
             'username',
-            'password',
+            // 'password',
             // 'admin',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id_user' => $model->id_user]);
-                 }
-            ],
+            // [
+            //     'class' => ActionColumn::className(),
+            //     'urlCreator' => function ($action, User $model, $key, $index, $column) {
+            //         return Url::toRoute([$action, 'id_user' => $model->id_user]);
+            //      }
+            // ],
         ],
     ]); ?>
 

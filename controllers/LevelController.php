@@ -131,4 +131,39 @@ class LevelController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+        /**
+     * Lists all Level models.
+     *
+     * @return string
+     */
+    public function actionGame($id_level)
+    {
+        $searchModel = new LevelSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+        
+        // $levels = Level::find()->where(['id_level' > 0])->limit(1)->all();
+
+        // $levels = Level::find()->where(['>', 'id_level', 0])->limit(1)->one();
+
+        // $levels = Level::findOne();
+
+        // $id_user = Yii::$app->user->identity->id_user;
+
+
+        // $this->user_id = $id_user;
+        // $this->user_id = $id_user;
+        // $this->user_id = $id_user;
+
+        // $this->save(false);
+
+        return $this->render('game', [
+            // 'levels' => $levels,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+
+
+    }
 }

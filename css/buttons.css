@@ -1,0 +1,29 @@
+.reg {
+    background-color: #5b3296;
+    color: #fff;
+    font-family: 'pixel', sans-serif;
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 30px;
+}
+  
+.butt {
+    background-color: #5b3296;
+    color: #fff;
+    font-family: 'pixel', sans-serif;
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 30px;
+    transition: 1.2s;
+}
+
+.reg:hover, .butt:hover {
+    background-color: #502886;
+    color: #fff;
+}

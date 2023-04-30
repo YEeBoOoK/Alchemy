@@ -1,24 +1,25 @@
 <?php
 
 namespace app\models;
-
-use Yii;
-use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
+use Yii;
 
 /**
  * This is the model class for table "user".
  *
  * @property int $id_user
+ * @property string|null $photo
  * @property string $email
  * @property string $username
  * @property string $password
+ * @property string $passwordConfirm
+ * @property int $agree
  * @property int $admin
  *
  * @property UserResponse[] $userResponses
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -34,10 +35,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'username', 'password'], 'required'],
-            [['admin'], 'integer'],
-            [['email', 'username', 'password'], 'string', 'max' => 255],
-            [['email', 'username'], 'unique'],
+            [['email', 'username', 'password', 'passwordConfirm'], 'required'],
+            [['agree', 'admin'], 'integer'],
+            [['photo', 'email', 'username', 'password'], 'string', 'max' => 255],
+            [['email'], 'unique'],
+            [['username'], 'unique'],
+
+            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'skipOnEmpty' => false, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg'],
         ];
     }
 
@@ -47,13 +51,17 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id_user' => 'Id Пользователя',
+            'id_user' => 'Идентификатор Пользователя',
+            'photo' => 'Фотография (не обязательно)',
             'email' => 'Email',
             'username' => 'Username',
             'password' => 'Пароль',
-            // 'admin' => 'Admin',
+            'passwordConfirm' => 'Подтверждение пароля',
+            'agree' => 'Я даю согласие на обработку данных',
+            // 'admin' => 'Админ',
         ];
     }
+
 
 
     // Реализация интерфейса 
@@ -120,7 +128,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->password === $password;
     }
-
 
 
     /**

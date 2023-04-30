@@ -10,7 +10,9 @@ use yii\bootstrap5\ActiveForm;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+
+    <?= $form->field($model, 'photo')->fileInput() ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
@@ -18,7 +20,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'passwordConfirm')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'passwordConfirm')->passwordInput() ?>
 
     <?= $form->field($model, 'agree')->checkbox() ?>
 
@@ -27,6 +29,6 @@ use yii\bootstrap5\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-    <a href="../site/login">Есть аккаунт?</a>
+    <!-- <a href="../site/login">Есть аккаунт?</a> -->
 
 </div>

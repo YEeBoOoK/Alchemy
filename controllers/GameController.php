@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Level;
+use app\models\LevelSearch;
+
 use Yii;
 
 class GameController extends \yii\web\Controller
@@ -20,9 +22,15 @@ class GameController extends \yii\web\Controller
     {
         $id_level = 1;
         $levels = Level::find()->all();
+
+        $searchModel = new LevelSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('index', [
             'levels' => $levels,
             'currentLevelId' => $id_level,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

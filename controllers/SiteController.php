@@ -77,8 +77,13 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            // return $this->goBack();
+            return $this->redirect(['/user/profile']);
         }
+        // if ($model->load($this->request->post()) && $model->save()) {
+        //     Yii::$app->user->login($model);
+            
+        // }
 
         $model->password = '';
         return $this->render('login', [
@@ -124,5 +129,15 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Displays directory page.
+     *
+     * @return string
+     */
+    public function actionDirectory()
+    {
+        return $this->render('directory');
     }
 }

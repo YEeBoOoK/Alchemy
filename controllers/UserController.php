@@ -8,7 +8,8 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\bootstrap5\ActiveForm;
+use yii\web\UploadedFile;
+
 use Yii;
 
 /**
@@ -71,10 +72,25 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new RegForm();
+        $time = time();
 
-        if ($model->load($this->request->post()) && $model->save()) {
-            Yii::$app->user->login($model);
-            return $this->redirect(['view', 'id_user' => $model->id_user]);
+        if ($model->load($this->request->post())) {
+            $model->photo = UploadedFile::getInstance($model, 'photo');
+            
+            if ($model->photo !== null) {
+                $model->photo->saveAs('web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+                $model->photo=('/web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+            } else {
+                $model->photo=('/web/UserPhoto/UserImg.jpg');
+            }
+
+            // $model->passwordConfirm = $model->password;
+            if ($model->save()) {
+                Yii::$app->user->login($model);
+                return $this->redirect(['/user/profile']);
+            }
+            
+            
         }
 
         return $this->render('create', [
@@ -93,9 +109,15 @@ class UserController extends Controller
     public function actionUpdate($id_user)
     {
         $model = $this->findModel($id_user);
+        $time = time();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_user' => $model->id_user]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->photo = UploadedFile::getInstance($model, 'photo');
+            $model->photo->saveAs('web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+            $model->photo=('/web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+
+            $model->save(false);
+            return $this->redirect('profile');
         }
 
         return $this->render('update', [
@@ -131,5 +153,17 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    // Профиль пользователя
+    public function actionProfile()
+    {
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('profile', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }

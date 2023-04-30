@@ -1,0 +1,249 @@
+/* Левая половинка страницы */
+/* #sidebar {
+    width: 50%;
+    min-width: 300px;
+    position: relative;
+    padding: 2em;
+    font-size: 15px;
+    float: left;
+  } */
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! Правая часть страницы !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+/* Редактор кода */
+#editor {
+    position: relative;
+}
+  
+#editor,
+pre {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 100%;
+    line-height: 1.5;
+    color: #777;
+    margin: 0;
+}
+  
+#css {
+    height: 260px;
+    position: relative;
+    padding: 10px 10px 10px 40px;
+    background-color: #282A36;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Поле для ввода кода (стих) */
+input[type=range]  {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    border: 1px solid #a683d6;
+    /* background: #a683d6; */
+    border-radius: 10px;
+    margin: 10px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: #674e8d;
+    border: #674e8d;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    -webkit-appearance: none;
+}
+
+#code {
+    display: block;
+    width: calc(100% - 45px);
+    height: 19px;
+    margin-left: 16px;
+    border: none;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    /* overflow: auto; */
+}
+
+/* Кнопка дальше */
+button#next {
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    background-color: #5b3296;
+    border: none;
+    border-radius: 4px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#next {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    padding-top: 0.3em;
+}
+  
+  #next.disabled {
+    opacity: 0.5;
+}
+
+/* Циферки */
+.line-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 10px 6px;
+    text-align: right;
+    background-color: #282A36;
+    color: #868D9A;
+}
+  
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! Левая часть страницы !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+#view {
+    padding: 1em;
+}
+  
+/* Игровое поле */
+#board {
+    position: sticky;
+    top: 1em;
+    width: 40vw;
+    height: 30vw;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: calc(100vh - 2em);
+    max-height: calc(100vh - 2em);
+    border: 12px solid #996b3d;
+    border-bottom: 40px solid #996b3d;
+    /* border-radius: 50px; */
+    /* overflow: hidden; */
+    /* #6D5720 
+        #6a5f40
+        #4c3900
+        #B9824A
+        #996b3d
+    */
+}
+  
+/* Ячейки игрового поля */
+#table,
+#element,
+#surface,
+#overlay {
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(4, 25%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  
+.current, .total {
+    font-family: 'Source Code Pro', monospace;
+}
+
+/* Элементы с этим id отоброжаются первым планом */
+#element {
+    z-index: 30;
+}
+  
+/* Не знаю, что это */
+#surface {
+    background-color: #523D1F;
+    overflow: hidden;
+}
+  
+/* Ячейки поля */
+.piece {
+    width: 100%;
+    height: 100%;
+    background-image: url("/web/img/wood.png");
+    background-size: calc(10vw - 1px);
+    /* background-color: #ccb580; */
+}
+  
+/* Полоски между квадратиками */
+#overlay .piece {
+    z-index: 50;
+    background: none;
+    box-shadow: inset 5px 5px 0 rgb(255 255 255 / 5%), inset -2px -2px 0 #854e0033;
+    /* #665235 
+        #cbad82
+    */
+}
+  
+#table {
+    z-index: 20;
+}
+  
+.element,
+.treatment {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+  
+.element .bg,
+.treatment .bg {
+    width: 100%;
+    height: 100%;
+    background-position: left top;
+    background-size: calc(10vw - 4px);
+}
+  
+
+/* Счетчик уровней */
+#level-counter {
+    position: absolute;
+    display: inline-block;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 90%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 100; 
+}
+  
+/* Стрелки (треугольники) */
+.triangle {
+    display: inline-block; /* Строчно-блочное отображение (Выстраиваем элементы в ряд, а не друг под другом) */
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+/* Ширина стрелок */
+.left .triangle {
+    border-right: 14px solid rgba(255, 255, 255, 0.7);
+}
+
+.right .triangle {
+    border-left: 14px solid rgba(255, 255, 255, 0.7);
+}
+
+

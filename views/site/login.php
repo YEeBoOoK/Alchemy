@@ -10,7 +10,7 @@ use yii\bootstrap5\Html;
 $this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+<div class="site-login bg-form">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Пожалуйста, заполните следующие поля для входа в систему:</p>
@@ -37,9 +37,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <div class="col-lg-11">
-                <?= Html::submitButton('Войти', ['class' => 'btn butt', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Войти', ['class' => 'btn butt mb-2', 'name' => 'login-button']) ?>
             </div>
         </div>
 
     <?php ActiveForm::end(); ?>
+
+    <a href="../user/create">Нет аккаунта?</a>
+
 </div>

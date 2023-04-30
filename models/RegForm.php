@@ -10,21 +10,20 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property int $id_user
- * @property string $surname
- * @property string $name
- * @property string|null $patronymic
- * @property int $age
+ * @property string|null $photo
  * @property string $email
  * @property string $username
  * @property string $password
+ * @property string $passwordConfirm
+ * @property int $agree
  * @property int $admin
  */
 class RegForm extends User
 {
 
     // Объявляем 2 новые публичные переменные для подтверждения пароля и согласия на обработку данных
-    public $passwordConfirm;
-    public $agree;
+    // public $passwordConfirm;
+    // public $agree;
 
     /**
      * {@inheritdoc}
@@ -32,17 +31,19 @@ class RegForm extends User
     public function rules()
     {
         return [
-            [['email', 'username', 'password', 'passwordConfirm', 'agree'], 'required'],
+            [['email', 'username', 'password', 'passwordConfirm', 'agree'], 'required', 'message' => 'Поле обязательно для заполнения'],
             [['admin'], 'integer'],
-            [['email', 'username', 'password', 'passwordConfirm'], 'string', 'max' => 255],
-            [['email', 'username'], 'unique'],
+            [['email', 'username', 'password'], 'string', 'max' => 255],
             ['agree', 'boolean'],
-            
-            [['email'], 'email'],
+
+            [['email'], 'unique', 'message' => 'Данный email-адрес уже используется'],
+            [['username'], 'unique', 'message' => 'Данное имя пользователя уже занято'],
+            [['email'], 'email', 'message' => 'Введите корректный email-адрес (например: test@gmail.com)'],
             ['username', 'match', 'pattern' => '/^[A-Za-z0-9]{5,}$/u', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита и цифры, минимум 5 символов'],
             ['password', 'match', 'pattern' => '/^[a-zA-Z0-9]{8,}$/u', 'message' => 'Пароль должен содержать буквы латинского алфавита и цифры, минимум 8 символов'],
             ['passwordConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли должны совпадать'],
             ['agree', 'compare', 'compareValue' => true, 'message' => ''],
+            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg'],
         ];
     }
 
@@ -53,6 +54,7 @@ class RegForm extends User
     {
         return [
             'id_user' => 'Id User',
+            'photo' => 'Фотография (не обязательно)',
             'email' => 'Email',
             'username' => 'Username',
             'password' => 'Пароль',

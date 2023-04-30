@@ -1,0 +1,43 @@
+.element,
+.treatment {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.element .bg,
+.treatment .bg {
+  width: 100%;
+  height: 100%;
+  background-position: left top;
+  background-size: calc(10vw - 4px);
+}
+
+.element.fire .bg {
+  background-image: url("/web/img/water.gif");
+}
+
+.element.water .bg {
+  background-image: url("/web/img/water.gif");
+}
+
+.element.fire.correct .bg {
+  background-image: url("../images/fires-correct.svg");
+}
+
+.element.water.correct .bg {
+  background-image: url("../images/waters-correct.svg");
+}
+
+.treatment.fire .bg {
+  background-color: rgba(81, 140, 179, 1);
+  background-image: url("/web/img/water.gif");
+  animation: scroll 6s linear infinite;
+}
+
+.treatment.water .bg {
+  background-color: #63393E;
+  background-image: url("../images/poison.svg");
+  animation: scroll 6s linear infinite;
+}

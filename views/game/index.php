@@ -1,9 +1,16 @@
 <?php
-/** @var yii\web\View $this */
-
-$this->title = "Alchemy CSS"; 
-
 use app\models\Level;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+
+/** @var yii\web\View $this */
+/** @var app\models\LevelSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+
+$this->title = 'Alchemy CSS';
+$this->params['breadcrumbs'][] = $this->title;
 
 echo '
   <!-- Содержит контент веб-страницы. Контент, который должен отображаться на странице -->
@@ -70,25 +77,29 @@ echo '
           <span class="piece"></span>
           <span class="piece"></span>
           <span class="piece"></span>
-        </div>';
-
-        foreach ($levels as $level) {
-        echo '
+        </div>
         <!-- Счётчик уровня -->
       <div id="level-counter"> 
         <!-- Стрелка влева -->
         <span class="arrow left">
             <!-- Треугольник -->
           <span class="triangle"></span>
-        </span>
+        </span>';
+
+        // $model=$dataProvider->getModels();
+        $id_lavel = 1;
+        $model = new Level;
+        $levels = $model::findOne($id_level);
+        foreach ($levels as $level) {
+        echo '
         <!-- Индикатор уровня -->
         <span id="level-indicator">
           <!-- Текущий -->
-          <span class="current">1</span>
+          <span class="current">'.$level->id_level.'</span>
           <!-- Текст уровня -->
           <span id="labelLevel">уровень из</span>
           <!-- Всего -->
-          <span class="total">'.$level->id_level.'</span>
+          <span class="total">3</span>
           <!-- <span class="caret">▾</span> -->
         </span>
         <!-- Стрелка вправа -->
@@ -96,30 +107,23 @@ echo '
             <!-- Треугольник -->
           <span class="triangle"></span>
         </span>
-      </div>';
-        }
-
-      echo '</div>
+      </div>
+      
+      </div>
     </section>
     </div>
 
     <div class="col">
-    <section id="sidebar">
-        <div>
-            <h1 class="title">Алхимия CSS</h1>
-        </div>';
+      <section id="sidebar">
+        <h1><?= Html::encode($this->title) ?></h1>';
     
-        $currentLevel = null;
-        foreach ($levels as $level) {
-            if ($level->id_level == $currentLevelId) {
-                $currentLevel = $level;
-                break;
-            }
-        }
-        
-        if ($currentLevel) {
-            echo '<div id="instructions">' . $currentLevel->instruction . '</div>';
-        }
+        // $currentLevel = null;
+        //     if ($level->id_level != $currentLevelId) {
+        //         $currentLevel = $level;
+        //         break;
+        //     }
+            
+            echo '<div id="instructions" class="text-instructions">' . $level->instruction . '</div>';
 
     echo '
     <!--<div class="container-element">
@@ -131,15 +135,17 @@ echo '
     </div>-->
 
     <div id="editor">
-      <div id="css">
+      <div id="css" class="mt-3">
         <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</div>
         <pre id="before">'.$level->earlier.'</pre>
         <textarea id="code" autofocus autocapitalize="none"></textarea>
         <pre id="after">'.$level->after.'</pre>
       </div>
-        <button id="next">Дальшееее</button>
-    </div>
+        <button disabled="disabled" id="next">Дальшееее</button>
+    </div>';
+  }
 
+  echo '
   </section>
   </div>
 

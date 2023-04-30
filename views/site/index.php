@@ -8,17 +8,14 @@ $this->title = 'Alchemy CSS';
 
 <?php
 echo "<div class='site-index'>
-    <div class='jumbotron text-center mb-5 bg-transparent'>
-        <h1 class='display-4'>Добро пожаловать!</h1>
-        <p class='lead'>Надеюсь, успею дописать до мая</p>
+    <div class='jumbotron text-center bg-transparent'>
+        <h1 class='display-4 mb-5'>Добро пожаловать!</h1>
     </div>
 
     <div class='body-content'>
 
 
         <div class='row'>
-                <p>Сайт пока не готов, но тут должно быть что-то крутое.</p>
-                <br>
             <div class='text'>
                 <p>Алхимия CSS — это увлекательная игра, которая поможет вам освоить основы CSS, одного из самых популярных языков для создания веб-страниц.</p>
                 <p>В этой игре вы будете создавать новые элементы на странице, применять к ним различные свойства CSS, и смотреть, как они меняются.</p>
@@ -36,7 +33,7 @@ echo "<div class='site-index'>
             </div>";
         } else {
             echo "<div class='jumbotron mt-3 text-center bg-transparent'>
-            <p><a class='btn reg btn-lg' href='game/index'>Играть</a></p>
+            <p><a class='btn reg btn-lg' href='level/game'>Играть</a></p>
             </div>
             </div>
             </div>";

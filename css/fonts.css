@@ -1,0 +1,11 @@
+/* Шрифт */
+@font-face {
+    font-family: 'pixel';
+    src: url(/web/fonts/18959.ttf) format('truetype');
+    font-weight: normal;
+}
+
+/* Тело */
+body {
+  font-family: 'pixel', sans-serif;
+}

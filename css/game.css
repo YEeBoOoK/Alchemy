@@ -1,0 +1,18 @@
+/* Инструкция */
+#instructions {
+    padding-top: 1rem;
+}
+  
+#instructions,
+#instructions p,
+#instructions ul {
+    margin: 0;
+    padding-bottom: 1em;
+    /* font-size: calc(12px + 10 * (100vw / 1280)); */
+}
+
+.text-instructions {
+    background-color: #0c09139a;
+    padding: 15px;
+    margin: 0 auto;
+}

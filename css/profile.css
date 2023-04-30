@@ -1,0 +1,44 @@
+.user-photo {
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+}
+
+.user-data-bg {
+    background-color: #120c1d70;
+}
+
+.user-data{
+    /* font-size: 1.6vw; */
+    font-size: calc(12px + 10 * (100vw / 1280));
+}
+
+tr td.user-data {
+    /* font-size: 1.6vw; */
+    font-size: calc(10px + 10 * (100vw / 1280));
+}
+
+@media (min-width: 1250px) and (max-width: 2000px) { 
+    .user-data{
+        font-size: 25px;
+    }
+}
+
+.update-btn {
+    background-color: #5b3296;
+    color: #fff;
+    font-family: 'pixel', sans-serif;
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 30px;
+    transition: 1.2s;
+    cursor: pointer;
+}
+
+.update-btn:hover {
+    background-color: #502886;
+    color: #fff;
+  }

@@ -280,7 +280,9 @@ var game = {
       var markup = '';
       var colors = {
         'w': 'water',
-        'f': 'fire'
+        'f': 'fire',
+        'e': 'earth',
+        'a': 'air',
       };
   
       for (var i = 0; i < string.length; i++) {

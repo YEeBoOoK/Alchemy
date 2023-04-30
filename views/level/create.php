@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Level $model */
 
-$this->title = 'Create Level';
-$this->params['breadcrumbs'][] = ['label' => 'Levels', 'url' => ['index']];
+$this->title = 'Добавление уровня';
+$this->params['breadcrumbs'][] = ['label' => 'Уровни', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="level-create">
