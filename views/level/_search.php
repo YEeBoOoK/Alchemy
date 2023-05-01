@@ -25,6 +25,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'board') ?>
 
+    <?php // echo $form->field($model, 'class') ?>
+
+    <?php // echo $form->field($model, 'class2') ?>
+
     <?php // echo $form->field($model, 'selector') ?>
 
     <?php // echo $form->field($model, 'style') ?>
@@ -32,6 +36,10 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'earlier') ?>
 
     <?php // echo $form->field($model, 'after') ?>
+
+    <?php // echo $form->field($model, 'correct_answer') ?>
+
+    <?php // echo $form->field($model, 'user_response') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

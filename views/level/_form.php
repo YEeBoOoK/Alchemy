@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Level $model */
@@ -20,13 +20,21 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'board')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'class')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'class2')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'selector')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'style')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'style')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'earlier')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'after')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'correct_answer')->textInput() ?>
+
+    <?= $form->field($model, 'user_response')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt']) ?>

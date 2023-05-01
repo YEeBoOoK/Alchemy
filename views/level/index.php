@@ -34,10 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'instruction:ntext',
             'property_id',
             'board',
+            //'class',
+            //'class2',
             //'selector',
-            //'style:ntext',
+            //'style',
             //'earlier:ntext',
             //'after:ntext',
+            //'correct_answer',
+            //'user_response',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Level $model, $key, $index, $column) {

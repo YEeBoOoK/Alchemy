@@ -132,11 +132,6 @@ class LevelController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-        /**
-     * Lists all Level models.
-     *
-     * @return string
-     */
     public function actionGame($id_level)
     {
         $searchModel = new LevelSearch();

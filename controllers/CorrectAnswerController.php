@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\CorrectAnswer;
-use app\models\CorrectAnswereSearch;
+use app\models\CorrectAnswerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,7 +38,7 @@ class CorrectAnswerController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CorrectAnswereSearch();
+        $searchModel = new CorrectAnswerSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

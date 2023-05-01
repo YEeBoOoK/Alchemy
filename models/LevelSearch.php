@@ -17,8 +17,8 @@ class LevelSearch extends Level
     public function rules()
     {
         return [
-            [['id_level', 'property_id'], 'integer'],
-            [['name_level', 'instruction', 'board', 'selector', 'style', 'earlier', 'after'], 'safe'],
+            [['id_level', 'property_id', 'correct_answer', 'user_response'], 'integer'],
+            [['name_level', 'instruction', 'board', 'class', 'class2', 'selector', 'style', 'earlier', 'after'], 'safe'],
         ];
     }
 
@@ -60,11 +60,15 @@ class LevelSearch extends Level
         $query->andFilterWhere([
             'id_level' => $this->id_level,
             'property_id' => $this->property_id,
+            'correct_answer' => $this->correct_answer,
+            'user_response' => $this->user_response,
         ]);
 
         $query->andFilterWhere(['like', 'name_level', $this->name_level])
             ->andFilterWhere(['like', 'instruction', $this->instruction])
             ->andFilterWhere(['like', 'board', $this->board])
+            ->andFilterWhere(['like', 'class', $this->class])
+            ->andFilterWhere(['like', 'class2', $this->class2])
             ->andFilterWhere(['like', 'selector', $this->selector])
             ->andFilterWhere(['like', 'style', $this->style])
             ->andFilterWhere(['like', 'earlier', $this->earlier])

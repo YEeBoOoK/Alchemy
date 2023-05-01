@@ -7,10 +7,10 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\CorrectAnswereSearch $searchModel */
+/** @var app\models\CorrectAnswerSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Correct Answers';
+$this->title = 'Правильные ответы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="correct-answer-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Correct Answer', ['create'], ['class' => 'btn butt']) ?>
+        <?= Html::a('Добавить ответ', ['create'], ['class' => 'btn butt']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id_answer',
+            'id_answer',
             'level_id',
             'answer:ntext',
             [

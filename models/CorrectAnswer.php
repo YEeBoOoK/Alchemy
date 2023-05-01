@@ -12,6 +12,7 @@ use Yii;
  * @property string $answer
  *
  * @property Level $level
+ * @property Level[] $levels
  */
 class CorrectAnswer extends \yii\db\ActiveRecord
 {
@@ -42,9 +43,9 @@ class CorrectAnswer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_answer' => 'ID Ответа',
-            'level_id' => 'Уровень ID',
-            'answer' => 'Ответ',
+            'id_answer' => 'Id Answer',
+            'level_id' => 'Level ID',
+            'answer' => 'Answer',
         ];
     }
 
@@ -56,5 +57,15 @@ class CorrectAnswer extends \yii\db\ActiveRecord
     public function getLevel()
     {
         return $this->hasOne(Level::class, ['id_level' => 'level_id']);
+    }
+
+    /**
+     * Gets query for [[Levels]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLevels()
+    {
+        return $this->hasMany(Level::class, ['correct_answer' => 'id_answer']);
     }
 }

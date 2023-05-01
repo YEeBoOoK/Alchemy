@@ -13,6 +13,7 @@ use Yii;
  * @property string $response
  *
  * @property Level $level
+ * @property Level[] $levels
  * @property User $user
  */
 class UserResponse extends \yii\db\ActiveRecord
@@ -46,9 +47,9 @@ class UserResponse extends \yii\db\ActiveRecord
     {
         return [
             'id_response' => 'Id Response',
-            'user_id' => 'Пользователь ID',
-            'level_id' => 'Уровень ID',
-            'response' => 'Ответ пользователя',
+            'user_id' => 'User ID',
+            'level_id' => 'Level ID',
+            'response' => 'Response',
         ];
     }
 
@@ -60,6 +61,16 @@ class UserResponse extends \yii\db\ActiveRecord
     public function getLevel()
     {
         return $this->hasOne(Level::class, ['id_level' => 'level_id']);
+    }
+
+    /**
+     * Gets query for [[Levels]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLevels()
+    {
+        return $this->hasMany(Level::class, ['user_response' => 'id_response']);
     }
 
     /**
