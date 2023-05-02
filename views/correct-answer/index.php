@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\CorrectAnswerSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Правильные ответы';
+$this->title = 'Ответы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="correct-answer-index">
@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id_answer',
-            'level_id',
             'answer:ntext',
             [
                 'class' => ActionColumn::className(),

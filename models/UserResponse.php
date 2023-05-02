@@ -46,10 +46,10 @@ class UserResponse extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_response' => 'Id Response',
-            'user_id' => 'User ID',
-            'level_id' => 'Level ID',
-            'response' => 'Response',
+            'id_response' => 'Идентификатор ответа',
+            'user_id' => 'Идентификатор пользователя',
+            'level_id' => 'Идентификатор уровня',
+            'response' => 'Ответ пользователя',
         ];
     }
 

@@ -37,10 +37,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'after') ?>
 
-    <?php // echo $form->field($model, 'correct_answer') ?>
-
-    <?php // echo $form->field($model, 'user_response') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

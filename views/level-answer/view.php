@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\CorrectAnswer $model */
+/** @var app\models\LevelAnswer $model */
 
-$this->title = $model->id_answer;
-$this->params['breadcrumbs'][] = ['label' => 'Ответы', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Ответы на уровни', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="correct-answer-view">
+<div class="level-answer-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Редактировать', ['update', 'id_answer' => $model->id_answer], ['class' => 'btn butt']) ?>
-        <?= Html::a('Удалить', ['delete', 'id_answer' => $model->id_answer], [
+        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn butt']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Вы уверены, что хотите удалить данную запись?',
@@ -29,8 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id_answer',
-            'answer:ntext',
+            'id',
+            'level_id',
+            'answer_id',
         ],
     ]) ?>
 

@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var app\models\Level $model */
+/** @var app\models\LevelAnswer $model */
 
-$this->title = 'Добавить уровень';
-$this->params['breadcrumbs'][] = ['label' => 'Уровни', 'url' => ['index']];
+$this->title = 'Добавить ответ уровню';
+$this->params['breadcrumbs'][] = ['label' => 'Ответы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="level-create bg-form">
+<div class="level-answer-create bg-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -1,23 +1,25 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\CorrectAnswerSearch $model */
+/** @var app\models\LevelAnswerSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="correct-answer-search">
+<div class="level-answer-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id_answer') ?>
+    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'answer') ?>
+    <?= $form->field($model, 'level_id') ?>
+
+    <?= $form->field($model, 'answer_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

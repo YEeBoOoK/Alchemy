@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Level;
+use app\models\LevelAnswer;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\LevelSearch $searchModel */
+/** @var app\models\LevelAnswerSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Уровни';
+$this->title = 'Ответы на уровни';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="level-index">
+<div class="level-answer-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить уровень', ['create'], ['class' => 'btn butt']) ?>
+        <?= Html::a('Добавить ответ', ['create'], ['class' => 'btn butt']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,21 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_level',
-            'name_level',
-            'instruction:ntext',
-            'property_id',
-            'board',
-            //'class',
-            //'class2',
-            //'selector',
-            //'style',
-            //'earlier:ntext',
-            //'after:ntext',
+            'id',
+            'level_id',
+            'answer_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Level $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id_level' => $model->id_level]);
+                'urlCreator' => function ($action, LevelAnswer $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],

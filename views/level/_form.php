@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Level $model */
@@ -31,10 +31,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'earlier')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'after')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'correct_answer')->textInput() ?>
-
-    <?= $form->field($model, 'user_response')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt']) ?>

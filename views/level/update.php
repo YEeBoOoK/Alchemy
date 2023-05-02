@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Уровни', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $model->id_level, 'url' => ['view', 'id_level' => $model->id_level]];
 $this->params['breadcrumbs'][] = 'Редактирование';
 ?>
-<div class="level-update">
+<div class="level-update bg-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

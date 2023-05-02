@@ -1,3 +1,6 @@
+
+<!-- !!!!!!!!!!!!!!!!!!!!!Наверное можно удалить!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
 <?php
 
 use yii\helpers\Html;
@@ -5,8 +8,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\UserResponse $model */
 
-$this->title = 'Create User Response';
-$this->params['breadcrumbs'][] = ['label' => 'User Responses', 'url' => ['index']];
+$this->title = 'Добавить ответ пользователя';
+$this->params['breadcrumbs'][] = ['label' => 'Ответы пользователя', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-response-create">

@@ -41,7 +41,7 @@ class Property extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_property' => 'Id Объяснения',
+            'id_property' => 'Идентификатор объяснения',
             'name_property' => 'Название',
             'definition' => 'Описание',
         ];

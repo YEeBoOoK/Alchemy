@@ -17,7 +17,7 @@ class CorrectAnswerSearch extends CorrectAnswer
     public function rules()
     {
         return [
-            [['id_answer', 'level_id'], 'integer'],
+            [['id_answer'], 'integer'],
             [['answer'], 'safe'],
         ];
     }
@@ -59,7 +59,6 @@ class CorrectAnswerSearch extends CorrectAnswer
         // grid filtering conditions
         $query->andFilterWhere([
             'id_answer' => $this->id_answer,
-            'level_id' => $this->level_id,
         ]);
 
         $query->andFilterWhere(['like', 'answer', $this->answer]);

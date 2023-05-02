@@ -8,11 +8,9 @@ use Yii;
  * This is the model class for table "correct_answer".
  *
  * @property int $id_answer
- * @property int $level_id
  * @property string $answer
  *
- * @property Level $level
- * @property Level[] $levels
+ * @property LevelAnswer[] $levelAnswers
  */
 class CorrectAnswer extends \yii\db\ActiveRecord
 {
@@ -30,10 +28,8 @@ class CorrectAnswer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['level_id', 'answer'], 'required'],
-            [['level_id'], 'integer'],
+            [['answer'], 'required'],
             [['answer'], 'string'],
-            [['level_id'], 'exist', 'skipOnError' => true, 'targetClass' => Level::class, 'targetAttribute' => ['level_id' => 'id_level']],
         ];
     }
 
@@ -43,29 +39,18 @@ class CorrectAnswer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_answer' => 'Id Answer',
-            'level_id' => 'Level ID',
-            'answer' => 'Answer',
+            'id_answer' => 'Идентификатор',
+            'answer' => 'Ответ',
         ];
     }
 
     /**
-     * Gets query for [[Level]].
+     * Gets query for [[LevelAnswers]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLevel()
+    public function getLevelAnswers()
     {
-        return $this->hasOne(Level::class, ['id_level' => 'level_id']);
-    }
-
-    /**
-     * Gets query for [[Levels]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLevels()
-    {
-        return $this->hasMany(Level::class, ['correct_answer' => 'id_answer']);
+        return $this->hasMany(LevelAnswer::class, ['answer_id' => 'id_answer']);
     }
 }

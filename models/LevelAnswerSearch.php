@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\CorrectAnswer;
+use app\models\LevelAnswer;
 
 /**
- * CorrectAnswereSearch represents the model behind the search form of `app\models\CorrectAnswer`.
+ * LevelAnswerSearch represents the model behind the search form of `app\models\LevelAnswer`.
  */
-class CorrectAnswereSearch extends CorrectAnswer
+class LevelAnswerSearch extends LevelAnswer
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class CorrectAnswereSearch extends CorrectAnswer
     public function rules()
     {
         return [
-            [['id_answer', 'level_id'], 'integer'],
-            [['answer'], 'safe'],
+            [['id', 'level_id', 'answer_id'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class CorrectAnswereSearch extends CorrectAnswer
      */
     public function search($params)
     {
-        $query = CorrectAnswer::find();
+        $query = LevelAnswer::find();
 
         // add conditions that should always apply here
 
@@ -58,11 +57,10 @@ class CorrectAnswereSearch extends CorrectAnswer
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_answer' => $this->id_answer,
+            'id' => $this->id,
             'level_id' => $this->level_id,
+            'answer_id' => $this->answer_id,
         ]);
-
-        $query->andFilterWhere(['like', 'answer', $this->answer]);
 
         return $dataProvider;
     }

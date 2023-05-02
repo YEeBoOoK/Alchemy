@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Level;
-use app\models\LevelSearch;
+use app\models\LevelAnswer;
+use app\models\LevelAnswerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LevelController implements the CRUD actions for Level model.
+ * LevelAnswerController implements the CRUD actions for LevelAnswer model.
  */
-class LevelController extends Controller
+class LevelAnswerController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class LevelController extends Controller
     }
 
     /**
-     * Lists all Level models.
+     * Lists all LevelAnswer models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new LevelSearch();
+        $searchModel = new LevelAnswerSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class LevelController extends Controller
     }
 
     /**
-     * Displays a single Level model.
-     * @param int $id_level Id Level
+     * Displays a single LevelAnswer model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id_level)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id_level),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Level model.
+     * Creates a new LevelAnswer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Level();
+        $model = new LevelAnswer();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_level' => $model->id_level]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -83,18 +83,18 @@ class LevelController extends Controller
     }
 
     /**
-     * Updates an existing Level model.
+     * Updates an existing LevelAnswer model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id_level Id Level
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id_level)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id_level);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_level' => $model->id_level]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -103,68 +103,32 @@ class LevelController extends Controller
     }
 
     /**
-     * Deletes an existing Level model.
+     * Deletes an existing LevelAnswer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id_level Id Level
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id_level)
+    public function actionDelete($id)
     {
-        $this->findModel($id_level)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Level model based on its primary key value.
+     * Finds the LevelAnswer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id_level Id Level
-     * @return Level the loaded model
+     * @param int $id ID
+     * @return LevelAnswer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id_level)
+    protected function findModel($id)
     {
-        if (($model = Level::findOne(['id_level' => $id_level])) !== null) {
+        if (($model = LevelAnswer::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-
-    /**
-     * Lists all Level models.
-     *
-     * @return string
-     */
-    public function actionGame($id_level)
-    {
-        $searchModel = new LevelSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        
-        // $levels = Level::find()->where(['id_level' > 0])->limit(1)->all();
-
-        // $levels = Level::find()->where(['>', 'id_level', 0])->limit(1)->one();
-
-        // $levels = Level::findOne();
-
-        // $id_user = Yii::$app->user->identity->id_user;
-
-
-        // $this->user_id = $id_user;
-        // $this->user_id = $id_user;
-        // $this->user_id = $id_user;
-
-        // $this->save(false);
-
-        return $this->render('game', [
-            // 'levels' => $levels,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-
-
-
     }
 }

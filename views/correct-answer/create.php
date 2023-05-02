@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\CorrectAnswer $model */
 
-$this->title = 'Добавить правильный ответ';
-$this->params['breadcrumbs'][] = ['label' => 'Правильные ответы', 'url' => ['index']];
+$this->title = 'Добавить ответ';
+$this->params['breadcrumbs'][] = ['label' => 'Ответы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="correct-answer-create">
+<div class="correct-answer-create bg-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
