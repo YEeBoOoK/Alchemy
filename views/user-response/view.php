@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'level_id',
             'response:ntext',
+            'is_correct',
         ],
     ]) ?>
 

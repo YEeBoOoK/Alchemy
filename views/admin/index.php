@@ -15,6 +15,6 @@ $this->title = 'Alchemy CSS — Административная панель';
 <br>
 <a href="user/index" class="btn btn-light mb-3">Пользователи</a>
 <br>
-<a href="correct-answer/index" class="btn btn-light mb-3">Правильные ответы</a>
+<a href="level-answer/index" class="btn btn-light mb-3">Правильные ответы</a>
 <br>
 <a href="user-response/index" class="btn btn-light">Ответы пользователей(не ну а чо)</a>

@@ -49,6 +49,14 @@
         line-height: 1.5;
         margin: 0;
     }
+
+    /* .element .bg,
+    .treatment .bg {
+        width: 100%;
+        height: 100%;
+        background-position: left top;
+        background-size: calc(16vw - 4px);
+    } */
 }
 
 @media(max-width:767px) {

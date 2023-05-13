@@ -1,4 +1,20 @@
+/* Элементы с этим id отоброжаются первым планом */
+#element {
+  z-index: 30;
+}
+
+#table {
+  z-index: 40;
+}
+
 .element,
+.treatment {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .treatment {
   position: relative;
   width: 100%;
@@ -11,11 +27,11 @@
   width: 100%;
   height: 100%;
   background-position: left top;
-  background-size: calc(10vw - 4px);
+  background-size: calc(8vw - 4px);
 }
 
 .element.fire .bg {
-  background-image: url("/web/img/water.gif");
+  background-image: url("/web/img/fire.gif");
 }
 
 .element.water .bg {
@@ -40,4 +56,26 @@
   background-color: #63393E;
   background-image: url("../images/poison.svg");
   animation: scroll 6s linear infinite;
+}
+
+
+@media (min-width: 350px) and (max-width: 991px) {
+  .element .bg,
+  .treatment .bg {
+      width: 100%;
+      height: 100%;
+      background-position: left top;
+      background-size: calc(16vw - 4px);
+  }
+}
+
+
+.element.magic .bg {
+  background-image: url("/web/img/wow.gif");
+}
+
+
+/* ПОБЕДА */
+.element.steam .bg {
+  background-image: url("/web/img/steam.gif");
 }

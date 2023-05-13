@@ -18,6 +18,7 @@ use Yii;
  * @property string $style
  * @property string $earlier
  * @property string $after
+ * @property string $winClass
  *
  * @property LevelAnswer[] $levelAnswers
  * @property Property $property
@@ -42,7 +43,7 @@ class Level extends \yii\db\ActiveRecord
             [['name_level', 'instruction', 'board', 'selector', 'style', 'earlier', 'after'], 'required'],
             [['instruction', 'earlier', 'after'], 'string'],
             [['property_id'], 'integer'],
-            [['name_level', 'class', 'class2', 'selector', 'style'], 'string', 'max' => 255],
+            [['name_level', 'class', 'class2', 'selector', 'style', 'winClass'], 'string', 'max' => 255],
             [['board'], 'string', 'max' => 50],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => Property::class, 'targetAttribute' => ['property_id' => 'id_property']],
         ];
@@ -65,6 +66,7 @@ class Level extends \yii\db\ActiveRecord
             'style' => 'Style',
             'earlier' => 'Текст до кода',
             'after' => 'Текст после',
+            'winClass' => 'Класс получившегося элемента',
         ];
     }
 

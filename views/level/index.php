@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'style',
             //'earlier:ntext',
             //'after:ntext',
+            //'winClass',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Level $model, $key, $index, $column) {

@@ -11,7 +11,8 @@ use Yii;
  * @property int $user_id
  * @property int $level_id
  * @property string $response
- *
+ * @property int $is_correct
+ * 
  * @property Level $level
  * @property Level[] $levels
  * @property User $user
@@ -33,7 +34,7 @@ class UserResponse extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'level_id', 'response'], 'required'],
-            [['user_id', 'level_id'], 'integer'],
+            [['user_id', 'level_id', 'is_correct'], 'integer'],
             [['response'], 'string'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id_user']],
             [['level_id'], 'exist', 'skipOnError' => true, 'targetClass' => Level::class, 'targetAttribute' => ['level_id' => 'id_level']],
@@ -50,6 +51,7 @@ class UserResponse extends \yii\db\ActiveRecord
             'user_id' => 'Идентификатор пользователя',
             'level_id' => 'Идентификатор уровня',
             'response' => 'Ответ пользователя',
+            'is_correct' => 'Проверка на правильность',
         ];
     }
 

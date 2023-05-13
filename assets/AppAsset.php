@@ -32,9 +32,11 @@ class AppAsset extends AssetBundle
         'css/buttons.css',
         'css/elements.css',
         'css/style.css',
+        'css/preloader.css',
     ];
     public $js = [
         'js/app.js',
+        'js/preloader.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

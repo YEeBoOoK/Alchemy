@@ -28,9 +28,9 @@ pre {
 }
   
 #css {
-    height: 260px;
+    height: 420px;
     position: relative;
-    padding: 10px 10px 10px 40px;
+    padding: 10px 20px 10px 40px;
     background-color: #282A36;
     border-radius: 4px;
     overflow: hidden;
@@ -61,7 +61,7 @@ input[type=range]::-webkit-slider-thumb {
 #code {
     display: block;
     width: calc(100% - 45px);
-    height: 19px;
+    height: 21px;
     margin-left: 16px;
     border: none;
     font-family: 'Source Code Pro', monospace;
@@ -111,7 +111,8 @@ button#next {
     height: 100%;
     padding: 10px 6px;
     text-align: right;
-    background-color: #282A36;
+    /* Можно и без фона */
+    background-color: #0000001c; 
     color: #868D9A;
 }
   
@@ -128,7 +129,7 @@ button#next {
     position: sticky;
     top: 1em;
     width: 40vw;
-    height: 30vw;
+    height: 33.49vw;
     min-width: 300px;
     min-height: 300px;
     max-width: calc(100vh - 2em);
@@ -164,10 +165,6 @@ button#next {
     font-family: 'Source Code Pro', monospace;
 }
 
-/* Элементы с этим id отоброжаются первым планом */
-#element {
-    z-index: 30;
-}
   
 /* Не знаю, что это */
 #surface {
@@ -198,21 +195,21 @@ button#next {
     z-index: 20;
 }
   
-.element,
+/* .element,
 .treatment {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
-}
+} */
   
-.element .bg,
+/* .element .bg,
 .treatment .bg {
     width: 100%;
     height: 100%;
     background-position: left top;
     background-size: calc(10vw - 4px);
-}
+} */
   
 
 /* Счетчик уровней */

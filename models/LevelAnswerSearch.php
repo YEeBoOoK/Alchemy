@@ -17,7 +17,9 @@ class LevelAnswerSearch extends LevelAnswer
     public function rules()
     {
         return [
-            [['id', 'level_id', 'answer_id'], 'integer'],
+            [['id', 'level_id'], 'integer'],
+            [['answer'], 'safe'],
+
         ];
     }
 
@@ -59,7 +61,7 @@ class LevelAnswerSearch extends LevelAnswer
         $query->andFilterWhere([
             'id' => $this->id,
             'level_id' => $this->level_id,
-            'answer_id' => $this->answer_id,
+            'answer' => $this->answer,
         ]);
 
         return $dataProvider;

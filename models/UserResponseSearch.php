@@ -17,7 +17,7 @@ class UserResponseSearch extends UserResponse
     public function rules()
     {
         return [
-            [['id_response', 'user_id', 'level_id'], 'integer'],
+            [['id_response', 'user_id', 'level_id', 'is_correct'], 'integer'],
             [['response'], 'safe'],
         ];
     }
@@ -61,6 +61,7 @@ class UserResponseSearch extends UserResponse
             'id_response' => $this->id_response,
             'user_id' => $this->user_id,
             'level_id' => $this->level_id,
+            'is_correct' => $this->is_correct,
         ]);
 
         $query->andFilterWhere(['like', 'response', $this->response]);

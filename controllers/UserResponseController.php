@@ -2,11 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\Level;
 use app\models\UserResponse;
 use app\models\UserResponseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use Yii;
 
 /**
  * UserResponseController implements the CRUD actions for UserResponse model.
@@ -60,6 +63,11 @@ class UserResponseController extends Controller
         ]);
     }
 
+    public function beforeAction($action){
+        if ($action->id=='create') $this->enableCsrfValidation=false;
+        return parent::beforeAction($action);
+    }
+
     /**
      * Creates a new UserResponse model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -67,20 +75,66 @@ class UserResponseController extends Controller
      */
     public function actionCreate()
     {
+        $level_id = Yii::$app->request->post('level_id');
+        $styleValue=Yii::$app->request->post('response');
+        $level = Level::findOne($level_id);
+        if (!$level) return false;
+        
         $model = new UserResponse();
+        $model->user_id = Yii::$app->user->identity->id_user;
+        $model->level_id = $level->id_level;
+        $model->response = $styleValue;
+        $model->save();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_response' => $model->id_response]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+            
+        // $model = UserResponse::find()->where(['user_id' => Yii::$app->user->identity->id_user])
+        // ->andWhere(['level_id' => $level_id])->one();
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        // if ($level) {
+        //     if ($model) {
+        //         $existingAnswer = $model->response; // получаем ответ из базы данных
+            
+        //         // проверяем, совпадает ли новый ответ с ответом в базе
+        //         if ($existingAnswer === $styleValue) {
+        //             Yii::$app->session->setFlash('error', 'Такой ответ уже есть в базе данных');
+        //         } else {
+        //             $model->response = $styleValue;
+        //             $model->save();
+        //             Yii::$app->session->setFlash('success', 'Ответ успешно сохранен');
+        //         }
+        //     } else {
+        //         $model = new UserResponse();
+        //         $model->user_id = Yii::$app->user->identity->id_user;
+        //         $model->level_id = $level_id;
+        //         $model->response = $styleValue;
+        //         $model->save();
+        //         Yii::$app->session->setFlash('success', 'Ответ успешно сохранен');
+        //     }
+
+            // if ($level) {
+            //     $model = new UserResponse();
+            //     $model->user_id = Yii::$app->user->identity->id_user;
+            //     $model->level_id = $level->id_level;
+            //     $model->response = $styleValue;
+            //     $model->save();
+            // }
+        return 'false';
     }
+
+        // $model = new UserResponse();
+
+        // if ($this->request->isPost) {
+        //     if ($model->load($this->request->post()) && $model->save()) {
+        //         return $this->redirect(['view', 'id_response' => $model->id_response]);
+        //     }
+        // } else {
+        //     $model->loadDefaultValues();
+        // }
+
+        // return $this->render('create', [
+        //     'model' => $model,
+        // ]);
+    // }
 
     /**
      * Updates an existing UserResponse model.

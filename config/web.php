@@ -49,7 +49,11 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'level/game/<id_level:\d+>' => 'level/game',
+                // 'game/<id_level:\d+>' => 'level/game',
+                // 'level/game' => 'level/game/<id_level:\d+>',
+                'game/<id_level:\d+>' => 'level/game',
+                'profile' => 'user/profile',
+                'directory' => 'site/directory',
             ],
         ],
 

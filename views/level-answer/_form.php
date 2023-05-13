@@ -14,7 +14,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'level_id')->textInput() ?>
 
-    <?= $form->field($model, 'answer_id')->textInput() ?>
+    <?= $form->field($model, 'answer')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt']) ?>

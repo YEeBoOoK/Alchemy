@@ -32,8 +32,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     <title><?= Html::encode($this->title) ?></title>
     <link rel="icon" href="/web/icon.svg">      
     <?php $this->head() ?>
+    
 </head>
 <body class="d-flex flex-column h-100">
+
+<!-- ЗАГРУЗКА СТРАНИЦЫ -->
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+
 <?php $this->beginBody() ?>
 
 <!-- Менюшка -->
@@ -49,6 +56,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     // $level = Level::findOne($id_level);
     // $level = $dataProvider->getModels();
     $id_level = 1;
+    // $id_level = Yii::$app->request->get('id_level');
 
     if (Yii::$app->user->isGuest){
         $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
@@ -97,12 +105,30 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
 
 
 <footer id="footer" class="mt-auto py-3">
+    <script src="/js/app.js"></script>
+
+    <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bskeyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-dark">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Информационное сообщение</h1>
+                    <button type="button" class="btn-close" data-bsdismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body text-dark" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn butt" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
     <div class="container">
         <div class="row text-muted">
             <div class="col text-center text-light">&copy; Alchemy CSS <?= date('Y') ?></div>
         </div>
     </div>
-    <script src="/js/app.js"></script>
+    
 </footer>
 
 <?php $this->endBody() ?>

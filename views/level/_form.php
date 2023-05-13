@@ -32,6 +32,8 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'after')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'winClass')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt']) ?>
     </div>

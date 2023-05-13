@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $level_id
- * @property int $answer_id
+ * @property int $answer
  *
  * @property CorrectAnswer $answer
  * @property Level $level
@@ -30,9 +30,9 @@ class LevelAnswer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['level_id', 'answer_id'], 'required'],
-            [['level_id', 'answer_id'], 'integer'],
-            [['answer_id'], 'exist', 'skipOnError' => true, 'targetClass' => CorrectAnswer::class, 'targetAttribute' => ['answer_id' => 'id_answer']],
+            [['level_id', 'answer'], 'required'],
+            [['level_id'], 'integer'],
+            [['answer'], 'string', 'max' => 255],
             [['level_id'], 'exist', 'skipOnError' => true, 'targetClass' => Level::class, 'targetAttribute' => ['level_id' => 'id_level']],
         ];
     }
@@ -45,18 +45,8 @@ class LevelAnswer extends \yii\db\ActiveRecord
         return [
             'id' => 'Идентификатор',
             'level_id' => 'Идентификатор уровня',
-            'answer_id' => 'Идентификатор ответа',
+            'answer' => 'Правильный ответ',
         ];
-    }
-
-    /**
-     * Gets query for [[Answer]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAnswer()
-    {
-        return $this->hasOne(CorrectAnswer::class, ['id_answer' => 'answer_id']);
     }
 
     /**

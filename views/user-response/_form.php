@@ -18,6 +18,8 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'response')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'is_correct')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt']) ?>
     </div>

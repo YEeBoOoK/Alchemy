@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use Yii;
+
 /**
  * LevelController implements the CRUD actions for Level model.
  */
@@ -140,6 +142,7 @@ class LevelController extends Controller
      */
     public function actionGame($id_level)
     {
+        // $level = Yii::$app->request->get('id_level');
         $searchModel = new LevelSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
         
