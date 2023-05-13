@@ -75,50 +75,38 @@ class UserResponseController extends Controller
      */
     public function actionCreate()
     {
+        $user_id = Yii::$app->user->identity->id_user;
         $level_id = Yii::$app->request->post('level_id');
-        $styleValue=Yii::$app->request->post('response');
+        $newResponse=Yii::$app->request->post('response');
         $level = Level::findOne($level_id);
         if (!$level) return false;
         
-        $model = new UserResponse();
-        $model->user_id = Yii::$app->user->identity->id_user;
-        $model->level_id = $level->id_level;
-        $model->response = $styleValue;
-        $model->save();
+        $models = UserResponse::find()->where(['level_id' => $level_id, 'user_id' => $user_id]) -> all();
+        
+        if ($models === null) return false;
 
-            
-        // $model = UserResponse::find()->where(['user_id' => Yii::$app->user->identity->id_user])
-        // ->andWhere(['level_id' => $level_id])->one();
+        $responseFound = false;
+        // проверяем, существует ли ответ в базе данных
 
-        // if ($level) {
-        //     if ($model) {
-        //         $existingAnswer = $model->response; // получаем ответ из базы данных
-            
-        //         // проверяем, совпадает ли новый ответ с ответом в базе
-        //         if ($existingAnswer === $styleValue) {
-        //             Yii::$app->session->setFlash('error', 'Такой ответ уже есть в базе данных');
-        //         } else {
-        //             $model->response = $styleValue;
-        //             $model->save();
-        //             Yii::$app->session->setFlash('success', 'Ответ успешно сохранен');
-        //         }
-        //     } else {
-        //         $model = new UserResponse();
-        //         $model->user_id = Yii::$app->user->identity->id_user;
-        //         $model->level_id = $level_id;
-        //         $model->response = $styleValue;
-        //         $model->save();
-        //         Yii::$app->session->setFlash('success', 'Ответ успешно сохранен');
-        //     }
+        foreach ($models as $model) {
+            // ответ на данный уровень уже существует, сравниваем с новым ответом
+            if ($model->response == $newResponse) {
+                // ответы совпадают
+                $model->save(false);
+                $responseFound = true;
+                break;
+            } 
+        }
 
-            // if ($level) {
-            //     $model = new UserResponse();
-            //     $model->user_id = Yii::$app->user->identity->id_user;
-            //     $model->level_id = $level->id_level;
-            //     $model->response = $styleValue;
-            //     $model->save();
-            // }
-        return 'false';
+        if (!$responseFound) {
+            $model = new UserResponse();
+            $model->user_id = Yii::$app->user->identity->id_user;
+            $model->level_id = $level_id;
+            $model->response = $newResponse;
+            if (!$model->save()) return false;
+        }
+        
+        return 'succes';
     }
 
         // $model = new UserResponse();
