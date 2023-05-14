@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Level;
+use app\models\LevelAnswer;
 use app\models\UserResponse;
 use app\models\UserResponseSearch;
 use yii\web\Controller;
@@ -82,6 +83,7 @@ class UserResponseController extends Controller
         if (!$level) return false;
         
         $models = UserResponse::find()->where(['level_id' => $level_id, 'user_id' => $user_id]) -> all();
+        $correctAnswers = LevelAnswer::find()->where(['level_id' => $level_id])->all();
         
         if ($models === null) return false;
 
@@ -99,30 +101,28 @@ class UserResponseController extends Controller
         }
 
         if (!$responseFound) {
+            
             $model = new UserResponse();
-            $model->user_id = Yii::$app->user->identity->id_user;
+            $model->user_id = $user_id;
             $model->level_id = $level_id;
             $model->response = $newResponse;
+            foreach ($correctAnswers as $correctAnswer) {
+                if ($newResponse === $correctAnswer->answer) {
+                // ответ правильный, выполняем необходимые действия
+                    $model->is_correct = 1;
+                    // if (!$model->save()) return false;
+                    break;
+                } else {
+                    // ответ неправильный, выполняем необходимые действия
+                    if (!$model->save()) return false;
+                }
+            }
+
             if (!$model->save()) return false;
         }
         
-        return 'succes';
+        return 'success';
     }
-
-        // $model = new UserResponse();
-
-        // if ($this->request->isPost) {
-        //     if ($model->load($this->request->post()) && $model->save()) {
-        //         return $this->redirect(['view', 'id_response' => $model->id_response]);
-        //     }
-        // } else {
-        //     $model->loadDefaultValues();
-        // }
-
-        // return $this->render('create', [
-        //     'model' => $model,
-        // ]);
-    // }
 
     /**
      * Updates an existing UserResponse model.
@@ -134,7 +134,7 @@ class UserResponseController extends Controller
     public function actionUpdate($id_response)
     {
         $model = $this->findModel($id_response);
-
+        
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id_response' => $model->id_response]);
         }

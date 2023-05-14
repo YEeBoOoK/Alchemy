@@ -5,9 +5,9 @@ window.onload = function() {
         // var currentLevel = parseInt('<?php $id_level = Yii::$app->request->get('id_level'); ?>');
         // var currentLevel = parseInt('<?php echo Yii::$app->request->get(id_level); ?>');
         
-        let currentLevel = myJsLevel;
+        // let currentLevel = myJsLevel;
         let newLevel = currentLevel + 1;
-        // let newLevel = myJsLevel + 1;
+        newLevel = myJsLevel + 1;
 
         // Обновляем страницу с новым id_level
         window.location.href = 'https://dp-osmanova.сделай.site/level/game/' + newLevel;
@@ -130,21 +130,40 @@ function addAnswer(level_id, style) {
         method: 'POST',
         body: form,
     })
-        // .then((response) => response.text())
-        // .then((result) => {
-        //     let title = document.getElementById('staticBackdropLabel');
-        //     let body = document.getElementById('modalBody');
-        //     if (result === 'false') {
-        //         title.innerText = 'Информационное сообщение';
-        //         body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
-        //     } else {
-        //         title.innerText = 'Ошибка';
-        //         body.innerHTML = '<p>Ошибка отправки ответа</p>';
-        //     }
-        //     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
-        //     myModal.show();
-        // });
+
 }
+
+// function answerCheck(level_id, style) {
+//     let form = new FormData();
+//     form.append('level_id', level_id);
+
+//     const trimmedResponse = style.replace(/\s/g, ''); // удалить все пробелы
+//     form.append('response', trimmedResponse);
+
+//     const is_correct = 1; // удалить все пробелы
+//     form.append('is_correct', is_correct);
+
+//     fetch('https://dp-osmanova.сделай.site/user-response/update', {
+//         method: 'POST',
+//         body: form,
+//     })
+//         .then((response) => response.text())
+//         .then((result) => {
+//             let title = document.getElementById('staticBackdropLabel');
+//             let body = document.getElementById('modalBody');
+//             if (result === 'false') {
+//                 title.innerText = 'Информационное сообщение';
+//                 body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
+//             } else {
+//                 title.innerText = 'Ошибка';
+//                 body.innerHTML = '<p>К сожалению, ответ неверен(</p>';
+//             }
+//             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+//             myModal.show();
+//         });
+// }
+
+
 
 function applyStyle() {
     const codeTextArea = document.getElementById('code'); // получаем ссылку на элемент textarea

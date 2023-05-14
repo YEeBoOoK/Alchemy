@@ -17,8 +17,8 @@ class UserResponseSearch extends UserResponse
     public function rules()
     {
         return [
-            [['id_response', 'user_id', 'level_id', 'is_correct'], 'integer'],
-            [['response'], 'safe'],
+            [['id_response', 'user_id', 'level_id'], 'integer'],
+            [['response', 'is_correct'], 'safe'],
         ];
     }
 

@@ -1,5 +1,6 @@
 <?php
 use app\models\Level;
+use app\models\UserResponse;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -29,7 +30,9 @@ echo '
         $level = Level::find()->where(['id_level' => $id_level])->one();
 
         $winClass = $level->winClass;
-
+        // $userResponse = UserResponse::find()->where(['level_id' => $id_level])->all();
+        // $correct = $userResponse->is_correct;
+        //  let correct = '$correct';
         echo "<script>
                 let myJsLevel = $id_level;
                 let jsWin = '$winClass';
