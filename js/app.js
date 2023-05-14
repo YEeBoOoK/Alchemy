@@ -131,36 +131,33 @@ function addAnswer(level_id, style) {
         body: form,
     })
 
+    .then((response) => response.text())
+        .then((result) => {
+            let title = document.getElementById('staticBackdropLabel');
+            let body = document.getElementById('modalBody');
+            if (result === 'false') {
+                title.innerText = 'Ошибка';
+                body.innerHTML = '<p>К сожалению, ответ неверен(</p>';
+            } else {
+                title.innerText = 'Информационное сообщение';
+                body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
+            }
+            let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+            setTimeout(() => {        
+               myModal.show(); 
+            }, 3500);
+
+            
+            var close = document.getElementById("close");
+            close.addEventListener("click", function() { 
+            //    content.innerHTML = "One";
+                let newLevel = currentLevel + 1;
+                window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+            });
+    });
 }
 
-// function answerCheck(level_id, style) {
-//     let form = new FormData();
-//     form.append('level_id', level_id);
-
-//     const trimmedResponse = style.replace(/\s/g, ''); // удалить все пробелы
-//     form.append('response', trimmedResponse);
-
-//     const is_correct = 1; // удалить все пробелы
-//     form.append('is_correct', is_correct);
-
-//     fetch('https://dp-osmanova.сделай.site/user-response/update', {
-//         method: 'POST',
-//         body: form,
-//     })
-//         .then((response) => response.text())
-//         .then((result) => {
-//             let title = document.getElementById('staticBackdropLabel');
-//             let body = document.getElementById('modalBody');
-//             if (result === 'false') {
-//                 title.innerText = 'Информационное сообщение';
-//                 body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
-//             } else {
-//                 title.innerText = 'Ошибка';
-//                 body.innerHTML = '<p>К сожалению, ответ неверен(</p>';
-//             }
-//             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
-//             myModal.show();
-//         });
+// function answerCorrect() {
 // }
 
 
@@ -174,6 +171,12 @@ function applyStyle() {
     const level_id = 1; // значение уровня, которое надо отправить
     addAnswer(level_id, style);
     animate();
+}
+
+function nextLevel() {
+    let newLevel = currentLevel + 1;
+    // Обновляем страницу с новым id_level
+    window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
 }
 
 

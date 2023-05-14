@@ -110,13 +110,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
             <div class="modal-content">
                 <div class="modal-header text-dark">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Информационное сообщение</h1>
-                    <button type="button" class="btn-close" data-bsdismiss="modal" aria-label="Закрыть"></button>
+                    <button type="button" id="close" class="btn-close" data-bsdismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body text-dark" id="modalBody">
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <button type="button" class="btn butt" data-bs-dismiss="modal">Закрыть</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

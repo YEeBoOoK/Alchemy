@@ -30,11 +30,11 @@ echo '
         $level = Level::find()->where(['id_level' => $id_level])->one();
 
         $winClass = $level->winClass;
-        // $userResponse = UserResponse::find()->where(['level_id' => $id_level])->all();
+        $userResponse = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id])->one();
         // $correct = $userResponse->is_correct;
         //  let correct = '$correct';
         echo "<script>
-                let myJsLevel = $id_level;
+                let currentLevel = $id_level;
                 let jsWin = '$winClass';
               </script>";
         
@@ -152,10 +152,23 @@ echo '
                   <pre id="before">'.$level->earlier.'</pre>
                   <textarea id="code" autofocus autocapitalize="none"></textarea>
                   <pre id="after">'.$level->after.'</pre>
-                </div>
-                  <button onclick="applyStyle()" id="next">Проверить</button>
-              </div>
-              ';
+                </div>';
+
+                $models = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id]) -> all();
+
+                if (!$models) {
+                  echo '<button onclick="applyStyle()" id="next">Проверить</button>'; 
+                }
+
+                foreach ($models as $model) {
+                    if ($model->is_correct == 1) {
+                      echo '<button onclick="nextLevel()" id="next">Дальше</button>';
+                    } else {
+                      echo '<button onclick="applyStyle()" id="next">Проверить</button>'; 
+                    }
+                }
+
+              echo '</div>';
             }}
 
             echo "
