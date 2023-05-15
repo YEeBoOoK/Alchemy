@@ -88,8 +88,9 @@ class UserResponseController extends Controller
         if ($models === null) return false;
 
         $responseFound = false;
-        // проверяем, существует ли ответ в базе данных
+        $is_correct = 0;
 
+        // проверяем, существует ли ответ в базе данных
         foreach ($models as $model) {
             // ответ на данный уровень уже существует, сравниваем с новым ответом
             if ($model->response == $newResponse) {
@@ -106,22 +107,30 @@ class UserResponseController extends Controller
             $model->user_id = $user_id;
             $model->level_id = $level_id;
             $model->response = $newResponse;
+
+            // проверяем, является ли ответ правильным
             foreach ($correctAnswers as $correctAnswer) {
                 if ($newResponse === $correctAnswer->answer) {
                 // ответ правильный, выполняем необходимые действия
                     $model->is_correct = 1;
-                    // if (!$model->save()) return false;
+                    $is_correct = 1;
                     break;
-                } else {
-                    // ответ неправильный, выполняем необходимые действия
-                    if (!$model->save()) return false;
-                }
+                } 
+                // else {
+                //     // ответ неправильный, выполняем необходимые действия
+                //     if (!$model->save()) return false;
+                // }
             }
 
+            // $is_correct = Yii::$app->request->post('is_correct');
             if (!$model->save()) return false;
         }
         
-        return 'success';
+        // return $is_correct;
+        // echo $is_correct;
+        // Возвращаем значение $is_correct в формате JSON
+        return json_encode(['is_correct' => $is_correct]);
+
     }
 
     /**

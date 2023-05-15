@@ -2,15 +2,10 @@
 window.onload = function() {
     var arrow = document.querySelector('.arrow.right');
     arrow.addEventListener('click', function() {
-        // var currentLevel = parseInt('<?php $id_level = Yii::$app->request->get('id_level'); ?>');
-        // var currentLevel = parseInt('<?php echo Yii::$app->request->get(id_level); ?>');
-        
-        // let currentLevel = myJsLevel;
-        let newLevel = currentLevel + 1;
-        newLevel = myJsLevel + 1;
+        let newLevel = myJsLevel + 1;
 
         // Обновляем страницу с новым id_level
-        window.location.href = 'https://dp-osmanova.сделай.site/level/game/' + newLevel;
+        window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
     });
 }
 
@@ -35,90 +30,7 @@ textarea.addEventListener('keydown', function(event) {
 
 
 
-
-
-
-
-
-
 // ДОБАВЛЕНИЕ ОТВЕТА ПОЛЬЗОВАТЕЛЯ В БАЗУ
-// function addAnswer(level_id, styleValue) {
-//     let form = new FormData();
-//     form.append('level_id', level_id);
-//     form.append('response', styleValue);
-//     fetch('https://pr-osmanova.сделай.site/user-response/create', {method: 'POST', body: form})
-//     .then(response=>response.text())
-//     .then(result=>{
-//         console.log(result)
-//         let title=document.getElementById('staticBackdropLabel');
-//         let body=document.getElementById('modalBody');
-//         if (result==='false'){
-//             title.innerText='Ошибка';
-//             body.innerHTML="<p>Ошибка отправки ответа</p>"
-//         } else {
-//             title.innerText='Информационное сообщение';
-//             body.innerHTML="<p>Все верно, Вы гений, не иначе</p>"
-//         }
-//         let myModal = new
-//         bootstrap.Modal(document.getElementById("staticBackdrop"), {});
-//         myModal.show();
-//     })
-// }
-
-// // 
-// function applyStyle() {
-//     const codeTextArea = document.getElementById("code"); // получаем ссылку на элемент textarea
-//     const elementDiv = document.getElementById("element2"); // получаем ссылку на элемент div
-//     const styleValue = codeTextArea.value; // получаем значение из textarea
-//     elementDiv.setAttribute("style", styleValue); // устанавливаем значение свойства grid-row-start у элемента div
-//     // elementDiv.style = styleValue; // устанавливаем значение свойства grid-row-start у элемента div
-//     addAnswer();
-// }
-
-
-
-
-
-
-
-
-
-
-
-// window.onload = function() {
-//     var arrow = document.querySelector('.arrow.right');
-//     arrow.addEventListener('click', function() {
-//       var currentLevel = parseInt('<?php echo $id_level; ?>');
-//       var newLevel = currentLevel + 1;
-//       // Обновляем страницу с новым id_level
-//       window.location.href = 'https://dp-osmanova.сделай.site/level/game/' + newLevel;
-//     });
-//   }
-
-
-// window.onload = function() {
-//     var arrow = document.querySelector('.arrow.left');
-//     arrow.addEventListener('click', function() {
-//     //   var currentLevel = parseInt('<?php $id_level = Yii::$app->request->get('id_level'); ?>');
-//     // var currentLevel = parseInt("<?php echo Yii::$app->request->get('id_level', 1); ?>");
-//     var currentLevel = 2;
-
-//     var newLevel = currentLevel - 1;
-//     // Обновляем страницу с новым id_level
-//     window.location.href = 'https://dp-osmanova.сделай.site/level/game/' + newLevel;
-// });
-// }
-
-
-// JavaScript-код для изменения стиля элемента на основе введенного текста
-// const Element = document.getElementById("element"); // получаем элемент по id
-// const Code = document.getElementById("code"); // получаем инпут по id
-
-// Code.addEventListener("textarea", () => { // добавляем слушатель события "textarea"
-//   const textareaText = Code.value; // получаем значение введенного текста
-//   Element.style.color = textareaText; // изменяем цвет текста элемента на значение введенного текста
-// });
-
 
 function addAnswer(level_id, style) {
     let form = new FormData();
@@ -126,39 +38,52 @@ function addAnswer(level_id, style) {
     const trimmedResponse = style.replace(/\s/g, ''); // удалить все пробелы
     // console.log(trimmedResponse);
     form.append('response', trimmedResponse);
+    // form.append('is_correct', correct);
     fetch('https://dp-osmanova.сделай.site/user-response/create', {
         method: 'POST',
         body: form,
     })
 
-    .then((response) => response.text())
-        .then((result) => {
-            let title = document.getElementById('staticBackdropLabel');
-            let body = document.getElementById('modalBody');
-            if (result === 'false') {
-                title.innerText = 'Ошибка';
-                body.innerHTML = '<p>К сожалению, ответ неверен(</p>';
-            } else {
-                title.innerText = 'Информационное сообщение';
-                body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
-            }
-            let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
-            setTimeout(() => {        
-               myModal.show(); 
-            }, 3500);
+    .then((response) => response.json())
+    .then((data) => {
+        let сorrect = data.is_correct; // Получаем значение is_correct из ответа
 
+        let title = document.getElementById('staticBackdropLabel');
+        let body = document.getElementById('modalBody');
+
+        // if (result === 'false') {
+        //     title.innerText = 'Ошибка';
+        //     body.innerHTML = '<p>К сожалению, ответ неверен(</p>';
+        // } else {
+        if (сorrect === 1) {
+            animate();
+            title.innerText = 'Информационное сообщение';
+            body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
+            let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+            setTimeout(() => {     
+                myModal.show(); 
+            }, 3500);
+        } else {
+            title.innerText = 'Информационное сообщение';
+            body.innerHTML = '<p>Вы не глупий, но ответ глупий</p>';
+            let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {}); 
+            myModal.show(); 
+        }
             
-            var close = document.getElementById("close");
-            close.addEventListener("click", function() { 
-            //    content.innerHTML = "One";
-                let newLevel = currentLevel + 1;
-                window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
-            });
+        // }
+
+        
+        
     });
 }
 
-// function answerCorrect() {
-// }
+function answerCorrect() {
+    var close = document.getElementById("close");
+    close.addEventListener("click", function() { 
+        let newLevel = currentLevel + 1;
+        window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+    });
+}
 
 
 
@@ -170,8 +95,8 @@ function applyStyle() {
     // elementDiv.style = style;
     const level_id = 1; // значение уровня, которое надо отправить
     addAnswer(level_id, style);
-    animate();
 }
+
 
 function nextLevel() {
     let newLevel = currentLevel + 1;
@@ -179,20 +104,6 @@ function nextLevel() {
     window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
 }
 
-
-// function animate() {
-//     let element2 = document.getElementById('element2');
-//     let currentClass = element2.getAttribute('class');
-//     let winClass = jsWin;
-
-//     element2.classList.remove('element', 'currentClass');
-//     element2.classList.add('element', 'magic');
-
-//     setTimeout(() => {        
-//         element2.classList.remove('element', 'magic');
-//         element2.classList.add('element', 'winClass');
-//     }, 3000); // здесь 3000 - это время в миллисекундах, через которое нужно заменить класс
-// }
 
 function animate() {
     let element2 = document.getElementById('element2');

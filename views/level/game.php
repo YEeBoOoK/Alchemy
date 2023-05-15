@@ -155,18 +155,31 @@ echo '
                 </div>';
 
                 $models = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id]) -> all();
+                // if ($model) {
+                //   foreach ($models as $model) {
+                //     $is_correct = $model->is_correct;
+                //   } 
+                // }
 
+                $is_correct = 0;
                 if (!$models) {
-                  echo '<button onclick="applyStyle()" id="next">Проверить</button>'; 
+                  echo '<button onclick="applyStyle()" id="next" data-correct="' . $is_correct . '">Проверить</button>'; 
+                } else {
+                  foreach ($models as $model) {
+                    if ($model->is_correct == 1) {
+                      $is_correct = 1;
+                      echo '<button onclick="nextLevel()" id="next">Дальше</button>';
+                      break;
+                    }
+                  }
+                  if (!$is_correct) {
+                    echo '<button onclick="applyStyle()" id="next" data-correct="' . $is_correct . '">Проверить</button>'; 
+                  }
                 }
 
-                foreach ($models as $model) {
-                    if ($model->is_correct == 1) {
-                      echo '<button onclick="nextLevel()" id="next">Дальше</button>';
-                    } else {
-                      echo '<button onclick="applyStyle()" id="next">Проверить</button>'; 
-                    }
-                }
+                echo "<script>
+                        let correct = $is_correct;
+                      </script>";
 
               echo '</div>';
             }}
