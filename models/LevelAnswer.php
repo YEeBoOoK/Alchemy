@@ -44,7 +44,7 @@ class LevelAnswer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Идентификатор',
-            'level_id' => 'Идентификатор уровня',
+            'level_id' => 'Уровень',
             'answer' => 'Правильный ответ',
         ];
     }

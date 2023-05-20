@@ -53,6 +53,7 @@ $config = [
                 // 'level/game' => 'level/game/<id_level:\d+>',
                 'game/<id_level:\d+>' => 'level/game',
                 'profile' => 'user/profile',
+                'admin' => 'admin/index',
                 'directory' => 'site/directory',
             ],
         ],

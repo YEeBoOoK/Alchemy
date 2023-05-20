@@ -27,15 +27,23 @@ echo '
         $id_level = Yii::$app->request->get('id_level');
         $user_id = Yii::$app->user->identity->id_user;
 
-        $level = Level::find()->where(['id_level' => $id_level])->one();
 
+        $totalLevel = Level::find()
+        ->where(['id_level' => Level::find()->select('id_level')])
+        ->orderBy(['id_level' => SORT_DESC])
+        ->one();
+
+        $level = Level::find()->where(['id_level' => $id_level])->one();
         $winClass = $level->winClass;
+        $removeClass = $level->class2;
+
         $userResponse = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id])->one();
         // $correct = $userResponse->is_correct;
         //  let correct = '$correct';
         echo "<script>
                 let currentLevel = $id_level;
                 let jsWin = '$winClass';
+                let removeClass = '$removeClass';
               </script>";
         
         foreach ($levels as $level) {
@@ -72,12 +80,12 @@ echo '
                   </div>
 
                   <div id="element">
-                    <div id="element1" class="element '.$level->class.'" style="'.$level->style.'">
+                    <div class="element '.$level->class.'" style="'.$level->style.'">
                       <div class="bg"></div>
                     </div>
                   </div>
 
-                  <div id="table">
+                  <div id="element02">
                     <div id="element2" class="element '.$level->class2.'"> 
                       <div class="bg"></div>
                     </div>
@@ -115,8 +123,8 @@ echo '
                       <div id="level-counter"> 
 
                         <!-- Стрелка влева -->
-                        <span class="arrow left">
-                          <!-- Треугольник -->
+                        <span id="left" class="arrow left" onmousedown="back()">
+                          <!--Треугольник-->
                           <span class="triangle"></span>
                         </span>
                         
@@ -127,13 +135,13 @@ echo '
                             <!-- Текст уровня -->
                             <span id="labelLevel">уровень из</span>
                             <!-- Всего -->
-                            <span class="total">3</span>
+                            <span class="total">'.$totalLevel->id_level.'</span>
                         <!-- <span class="caret">▾</span> -->
                           </span>
                         
                           <!-- Стрелка вправа -->
-                          <span class="arrow right">
-                            <!-- Треугольник -->
+                          <span id="right" class="arrow right" onmousedown="next()">
+                            <!--Треугольник-->
                             <span class="triangle"></span>
                           </span>
                       </div>
@@ -155,11 +163,6 @@ echo '
                 </div>';
 
                 $models = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id]) -> all();
-                // if ($model) {
-                //   foreach ($models as $model) {
-                //     $is_correct = $model->is_correct;
-                //   } 
-                // }
 
                 $is_correct = 0;
                 if (!$models) {

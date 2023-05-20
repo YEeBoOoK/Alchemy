@@ -4,6 +4,7 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
+use app\models\UserResponse;
 use app\widgets\Alert;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
@@ -55,23 +56,42 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     $items = [];
     // $level = Level::findOne($id_level);
     // $level = $dataProvider->getModels();
-    $id_level = 1;
+    // $id_level = 1;
     // $id_level = Yii::$app->request->get('id_level');
 
+    // $level = Level::find()->where(['user_id' => $user_id], )
+
+    
     if (Yii::$app->user->isGuest){
         $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
         $items[] = ['label' => 'Регистрация', 'url' => ['/user/create']];
         $items[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
 
-    } else{
+    } else {
+        $user_id = Yii::$app->user->identity->id_user;
+        $userResponse = UserResponse::find()
+            ->where(['user_id' => $user_id, 'is_correct' => 1])
+            ->orderBy(['level_id' => SORT_DESC])
+            ->one();
+
         if(Yii::$app->user->identity->admin==1){
-            $items[] = ['label' => 'Административная панель', 'url' => ['/admin']];
+            $items[] = ['label' => 'Административная панель', 'url' => ['/admin/index']];
+            $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
             $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
-            $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $id_level]];
+            if ($nextLevelId = $userResponse !== null) {
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $userResponse->level_id + 1]];
+            } else {
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevelId + 1]];
+            }
+            
         } else {
             $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
             $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
-            $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $id_level]];
+            if (($nextLevelId = $userResponse) !== null) {
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $userResponse->level_id + 1]];
+            } else {
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevelId + 1]];
+            }
         }
         $items[] = '<li class="nav-item">'
             . Html::beginForm(['/site/logout'])
@@ -110,12 +130,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
             <div class="modal-content">
                 <div class="modal-header text-dark">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Информационное сообщение</h1>
-                    <button type="button" class="btn-close" data-bsdismiss="modal" aria-label="Закрыть"></button>
+                    <!-- <button type="button" class="btn-close" data-bsdismiss="modal" aria-label="Закрыть"></button> -->
                 </div>
                 <div class="modal-body text-dark" id="modalBody">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn butt" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" id="close" class="btn butt" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </div>
         </div>

@@ -5,16 +5,16 @@ $this->title = 'Alchemy CSS — Административная панель';
 ?>
 <h1>Административная панель</h1>
 
-<p>
-    Лялялял я админ
-</p>
+<a href="property/index" class="btn mb-3 admin-butt">
+    <img class="admin-panel" src="/web/img/instruction.png" alt="Инструкции">
+</a>
 
-<a href="level/index" class="btn btn-light mb-3">Уровни</a>
-<br>
-<a href="property/index" class="btn btn-light mb-3">Инструкции</a>
-<br>
-<a href="user/index" class="btn btn-light mb-3">Пользователи</a>
-<br>
-<a href="level-answer/index" class="btn btn-light mb-3">Правильные ответы</a>
-<br>
-<a href="user-response/index" class="btn btn-light">Ответы пользователей(не ну а чо)</a>
+<a href="level/index" class="btn mb-3 admin-butt">
+    <img class="admin-panel" src="/web/img/level.png" alt="Уровни">
+</a>
+
+<a href="level-answer/index" class="btn mb-3 admin-butt">
+    <img class="admin-panel" src="/web/img/answer.png" alt="Правильные ответы">
+</a>
+
+<!-- <a href="user/index" class="btn btn-light mb-3">Пользователи</a> -->

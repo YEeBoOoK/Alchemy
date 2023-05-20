@@ -15,13 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        Тут что-то
+        Grid-template-columns
       </button>
     </h2>
 
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        Данное свойство определяет количество колонок сетки, а так же их ширину.  
+        <br><br>
+        Вы можете задать ширину каждой колонки по отдельности:
+        <div class="text-center">
+          <img class="p-3 directory-photo" src="/web/photoDirectory/grid-template-columns(2).png" alt="grid-template-columns">
+        </div>
+        Или установить одинаковую ширину сразу для всех колонок, используя функцию <code>repeat()</code>.
+        Использование в качестве единицы измерения fr (дробной единицы), позволит сделать ширину всех колонок одинакового размера.
+        <div class="text-center">
+          <img class="p-3 directory-photo" src="/web/photoDirectory/grid-template-columns (4).png" alt="grid-template-columns">
+        </div>
       </div>
     </div>
   </div>

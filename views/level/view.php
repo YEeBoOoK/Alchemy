@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Level $model */
 
-$this->title = $model->id_level;
+$this->title = $model->name_level;
 $this->params['breadcrumbs'][] = ['label' => 'Уровни', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

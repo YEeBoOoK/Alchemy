@@ -29,6 +29,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return 'user';
     }
 
+    // public $userPhoto;
+
     /**
      * {@inheritdoc}
      */
@@ -37,11 +39,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             [['email', 'username', 'password', 'passwordConfirm'], 'required'],
             [['agree', 'admin'], 'integer'],
-            [['photo', 'email', 'username', 'password'], 'string', 'max' => 255],
+            [['email', 'username', 'password'], 'string', 'max' => 255],
             [['email'], 'unique'],
             [['username'], 'unique'],
 
-            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'skipOnEmpty' => false, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg'],
+            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg'],
         ];
     }
 
@@ -58,6 +60,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'password' => 'Пароль',
             'passwordConfirm' => 'Подтверждение пароля',
             'agree' => 'Я даю согласие на обработку данных',
+            // 'userPhoto' => 'Фотография (не обязательно)',
             // 'admin' => 'Админ',
         ];
     }

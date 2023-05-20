@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Property $model */
 
-$this->title = $model->id_property;
-$this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
+$this->title = $model->name_property;
+$this->params['breadcrumbs'][] = ['label' => 'Инструкции', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id_property' => $model->id_property], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id_property' => $model->id_property], [
+        <?= Html::a('Редактировать', ['update', 'id_property' => $model->id_property], ['class' => 'btn butt']) ?>
+        <?= Html::a('Удалить', ['delete', 'id_property' => $model->id_property], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены, что хотите удалить данный элемент?',
                 'method' => 'post',
             ],
         ]) ?>

@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\PropertySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Properties';
+$this->title = 'Инструкции';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="property-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Property', ['create'], ['class' => 'btn butt']) ?>
+        <?= Html::a('Добавить инструкцию', ['create'], ['class' => 'btn butt']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

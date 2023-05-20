@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Property $model */
 
-$this->title = 'Update Property: ' . $model->id_property;
-$this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
+$this->title = 'Редактировать инструкцию: ' . $model->id_property;
+$this->params['breadcrumbs'][] = ['label' => 'Инструкции', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_property, 'url' => ['view', 'id_property' => $model->id_property]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="property-update bg-form">
 

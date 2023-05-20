@@ -55,7 +55,7 @@ class Level extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_level' => 'Id Уровня',
+            'id_level' => 'Идентификатор',
             'name_level' => 'Название',
             'instruction' => 'Инструкция',
             'property_id' => 'Объяснение',

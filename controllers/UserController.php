@@ -110,11 +110,20 @@ class UserController extends Controller
     {
         $model = $this->findModel($id_user);
         $time = time();
+        // $user = User::find()->where(['id_user' => $id_user])->one();
+        // $photo = $user->photo;
+
+        $userPhoto = $model->photo;
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->photo = UploadedFile::getInstance($model, 'photo');
-            $model->photo->saveAs('web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
-            $model->photo=('/web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+
+            if ($model->photo !== null) {
+                $model->photo->saveAs('web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+                $model->photo=('/web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
+            } else {
+                $model->photo = $userPhoto;
+            }
 
             $model->save(false);
             return $this->redirect('profile');

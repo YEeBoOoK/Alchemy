@@ -33,6 +33,7 @@ class AppAsset extends AssetBundle
         'css/elements.css',
         'css/style.css',
         'css/preloader.css',
+        'css/admin.css',
     ];
     public $js = [
         'js/app.js',

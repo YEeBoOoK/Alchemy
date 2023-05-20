@@ -147,7 +147,7 @@ button#next {
 }
   
 /* Ячейки игрового поля */
-#table,
+#element02,
 #element,
 #surface,
 #overlay {
@@ -161,9 +161,9 @@ button#next {
     height: 100%;
 }
   
-.current, .total {
+/* .current, .total {
     font-family: 'Source Code Pro', monospace;
-}
+} */
 
   
 /* Не знаю, что это */
@@ -191,9 +191,9 @@ button#next {
     */
 }
   
-#table {
-    z-index: 20;
-}
+/* #element02 {
+    z-index: 40;
+} */
   
 /* .element,
 .treatment {
@@ -242,5 +242,3 @@ button#next {
 .right .triangle {
     border-left: 14px solid rgba(255, 255, 255, 0.7);
 }
-
-

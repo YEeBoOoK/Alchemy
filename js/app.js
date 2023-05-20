@@ -1,13 +1,21 @@
 // При нажатии на стрелочку уровень перелистывается
-window.onload = function() {
-    var arrow = document.querySelector('.arrow.right');
-    arrow.addEventListener('click', function() {
-        let newLevel = myJsLevel + 1;
 
-        // Обновляем страницу с новым id_level
-        window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
-    });
-}
+function back() {
+    var arrow_left = document.querySelector('.left .triangle');
+    let newLevel = currentLevel;
+    newLevel = currentLevel - 1;
+    // Обновляем страницу с новым id_level
+    window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+};
+
+function next() {
+    var arrow_right = document.querySelector('#right');
+    let newLevel = currentLevel;
+    newLevel = currentLevel + 1;
+    // Обновляем страницу с новым id_level
+    window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+};
+
 
 // ОТПРАВКА РЕЗУЛЬТАТА НА КНОПКУ ENTER (т.к. с пк удобнее на клавиатуре кнопу нажать, нежели на кнопку "Проверить")
 
@@ -60,6 +68,7 @@ function addAnswer(level_id, style) {
             title.innerText = 'Информационное сообщение';
             body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+            answerCorrect();
             setTimeout(() => {     
                 myModal.show(); 
             }, 3500);
@@ -93,7 +102,7 @@ function applyStyle() {
     const style = codeTextArea.value; // получаем значение из textarea
     element.setAttribute('style', style); // устанавливаем значение свойства у элемента div
     // elementDiv.style = style;
-    const level_id = 1; // значение уровня, которое надо отправить
+    const level_id = currentLevel; // значение уровня, которое надо отправить
     addAnswer(level_id, style);
 }
 
@@ -107,13 +116,15 @@ function nextLevel() {
 
 function animate() {
     let element2 = document.getElementById('element2');
-    let currentClass = element2.getAttribute('class');
+    // let currentClass = element2.getAttribute('class');
 
-    element2.classList.remove('element', 'currentClass');
-    element2.classList.add('element', 'magic');
+    // element2.classList.remove('element', 'currentClass');
+
+    element2.classList.remove(removeClass);
+    element2.classList.add('magic');
 
     setTimeout(() => {        
-        element2.classList.remove('element', 'magic');
-        element2.classList.add('element', jsWin);
+        element2.classList.remove('magic');
+        element2.classList.add(jsWin);
     }, 3000); // здесь 3000 - это время в миллисекундах, через которое нужно заменить класс
 }
