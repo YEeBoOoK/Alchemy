@@ -43,7 +43,8 @@ class RegForm extends User
             ['password', 'match', 'pattern' => '/^[a-zA-Z0-9]{8,}$/u', 'message' => 'Пароль должен содержать буквы латинского алфавита и цифры, минимум 8 символов'],
             ['passwordConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли должны совпадать'],
             ['agree', 'compare', 'compareValue' => true, 'message' => ''],
-            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg'],
+
+            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 5*1024*1024, 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg. Максимальный допустимый размер файла 5 МБ'],
         ];
     }
 

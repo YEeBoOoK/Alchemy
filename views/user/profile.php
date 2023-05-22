@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    
 
     $id_user = Yii::$app->user->identity->id_user;
 
@@ -43,13 +44,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <tr>
                             <th scope="row"></th>
-                            <td class="user-data">Email</td>
+                            <td class="user-data">Email:</td>
                             <td class="user-data">'.$user->email.'</td>
                         </tr>
 
                         <tr>
                             <th scope="row"></th>
-                            <td class="user-data">Статус</td>
+                            <td class="user-data">Статус:</td>
                             <td class="user-data">'; 
 
                                 if (!$models) {
@@ -60,16 +61,29 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return false;
                                 }
                                 
+                                $lastLevel = 0;
+
                                 foreach ($models as $model) {
-                                    if ($model->is_correct = 1) {
-                                        if ($model->level_id <= 3) {
-                                            echo 'Новичок</td></tr></table>
-                                            <div class="text-center">
-                                                <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
-                                            </div>';
-                                            break;
-                                        }
+                                    if ($model->is_correct == 1 && $model->level_id > $lastLevel) {
+                                        $lastLevel = $model->level_id;
                                     }
+                                }
+
+                                if ($lastLevel >= 1 && $lastLevel < 3) {
+                                    echo 'Новичок</td></tr></table>
+                                    <div class="text-center">
+                                        <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
+                                    </div>';
+                                } else if ($lastLevel > 3 && $lastLevel <= 7) {
+                                    echo 'Быстро учусь</td></tr></table>
+                                    <div class="text-center">
+                                        <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
+                                    </div>';
+                                } else if ($lastLevel > 7 && $lastLevel <= 12) {
+                                    echo 'Эксперт по гридам</td></tr></table>
+                                    <div class="text-center">
+                                        <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
+                                    </div>';
                                 }
                                     
                 echo ' 

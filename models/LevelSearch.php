@@ -18,7 +18,7 @@ class LevelSearch extends Level
     {
         return [
             [['id_level', 'property_id'], 'integer'],
-            [['name_level', 'instruction', 'board', 'class', 'class2', 'selector', 'style', 'earlier', 'after', 'winClass'], 'safe'],
+            [['name_level', 'instruction', 'class', 'class2', 'style', 'earlier', 'after', 'winClass'], 'safe'],
         ];
     }
 
@@ -64,10 +64,8 @@ class LevelSearch extends Level
 
         $query->andFilterWhere(['like', 'name_level', $this->name_level])
             ->andFilterWhere(['like', 'instruction', $this->instruction])
-            ->andFilterWhere(['like', 'board', $this->board])
             ->andFilterWhere(['like', 'class', $this->class])
             ->andFilterWhere(['like', 'class2', $this->class2])
-            ->andFilterWhere(['like', 'selector', $this->selector])
             ->andFilterWhere(['like', 'style', $this->style])
             ->andFilterWhere(['like', 'earlier', $this->earlier])
             ->andFilterWhere(['like', 'after', $this->after])

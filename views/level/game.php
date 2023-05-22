@@ -44,6 +44,7 @@ echo '
                 let currentLevel = $id_level;
                 let jsWin = '$winClass';
                 let removeClass = '$removeClass';
+                let lastLevel = $totalLevel->id_level;
               </script>";
         
         foreach ($levels as $level) {
@@ -168,14 +169,19 @@ echo '
                 if (!$models) {
                   echo '<button onclick="applyStyle()" id="next" data-correct="' . $is_correct . '">Проверить</button>'; 
                 } else {
+                  $is_last_level = true; // Предполагаем, что пользователь прошел последний уровень
+
                   foreach ($models as $model) {
-                    if ($model->is_correct == 1) {
+                    if (($model->is_correct == 1) && ($model->level_id < $totalLevel->id_level)) {
                       $is_correct = 1;
                       echo '<button onclick="nextLevel()" id="next">Дальше</button>';
                       break;
-                    }
+                    } 
                   }
-                  if (!$is_correct) {
+                    
+                    if ($is_last_level && ($model->level_id == $totalLevel->id_level)) {
+                      echo '<p class="bg-dark px-3 py-2 text-success text-end">Вы прошли последний уровень</p>';
+                    } else if (!$is_correct) {
                     echo '<button onclick="applyStyle()" id="next" data-correct="' . $is_correct . '">Проверить</button>'; 
                   }
                 }

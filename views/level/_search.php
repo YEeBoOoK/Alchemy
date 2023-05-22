@@ -23,13 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'property_id') ?>
 
-    <?= $form->field($model, 'board') ?>
-
     <?php // echo $form->field($model, 'class') ?>
 
     <?php // echo $form->field($model, 'class2') ?>
-
-    <?php // echo $form->field($model, 'selector') ?>
 
     <?php // echo $form->field($model, 'style') ?>
 

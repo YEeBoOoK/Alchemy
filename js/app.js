@@ -1,19 +1,23 @@
-// При нажатии на стрелочку уровень перелистывается
+// ПЕРЕХОД НА УРОВНИ ПО СТРЕЛОЧКАМ 
 
 function back() {
-    var arrow_left = document.querySelector('.left .triangle');
     let newLevel = currentLevel;
     newLevel = currentLevel - 1;
+
     // Обновляем страницу с новым id_level
-    window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+    if (newLevel > 0) {
+        window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+    }
 };
 
 function next() {
-    var arrow_right = document.querySelector('#right');
     let newLevel = currentLevel;
     newLevel = currentLevel + 1;
+
     // Обновляем страницу с новым id_level
-    window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+    if (newLevel <= lastLevel && correct === 1) {
+        window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
+    }
 };
 
 
@@ -29,12 +33,10 @@ textarea.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' && !event.shiftKey) {
         // Отменяем стандартное поведение браузера при нажатии на клавишу "Enter"
         event.preventDefault();
-
         // Эмулируем нажатие кнопки при помощи метода click()
         button.click();
     }
 });
-
 
 
 
@@ -59,11 +61,7 @@ function addAnswer(level_id, style) {
         let title = document.getElementById('staticBackdropLabel');
         let body = document.getElementById('modalBody');
 
-        // if (result === 'false') {
-        //     title.innerText = 'Ошибка';
-        //     body.innerHTML = '<p>К сожалению, ответ неверен(</p>';
-        // } else {
-        if (сorrect === 1) {
+        if (сorrect === 1 && level_id !== lastLevel) {
             animate();
             title.innerText = 'Информационное сообщение';
             body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
@@ -72,19 +70,26 @@ function addAnswer(level_id, style) {
             setTimeout(() => {     
                 myModal.show(); 
             }, 3500);
+        } else if (сorrect === 1 && level_id === lastLevel) {
+            animate();
+            title.innerText = 'Информационное сообщение';
+            body.innerHTML = '<p>Все верно, Вы гений, не иначе. <br> На данный момент, Вы выполнили последний уровень! Похвалите себя и возвращайтесь позже</p>';
+            let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+            theEnd();
+            setTimeout(() => {     
+                myModal.show(); 
+            }, 3500);
         } else {
             title.innerText = 'Информационное сообщение';
             body.innerHTML = '<p>Вы не глупий, но ответ глупий</p>';
             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {}); 
             myModal.show(); 
-        }
-            
-        // }
-
-        
+        } 
         
     });
 }
+
+// ДОБАВЛЯЮ ЧИТАЛКУ НА НАЖАТИЕ КНОПКИ "ЗАКРЫТЬ" (В МОДАЛЬНОМ ОКНЕ)
 
 function answerCorrect() {
     var close = document.getElementById("close");
@@ -95,6 +100,7 @@ function answerCorrect() {
 }
 
 
+// ПРИМЕНЕНИЕ СТИЛЯ К ЭЛЕМЕНТУ НА ИГРОВОМ СТОЛЕ
 
 function applyStyle() {
     const codeTextArea = document.getElementById('code'); // получаем ссылку на элемент textarea
@@ -107,19 +113,17 @@ function applyStyle() {
 }
 
 
+// ФУНКЦИЯ ДЛЯ КНОПКИ "ДАЛЬШЕ" НА УЖЕ ПРОЙДЕННЫХ ПОЛЬЗОВАТЕЛЕМ УРОВНЯХ
+
 function nextLevel() {
     let newLevel = currentLevel + 1;
-    // Обновляем страницу с новым id_level
     window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
 }
 
+// АНИМАЦИЯ, КОТОРАЯ ПОЯВЛЯЕТСЯ ПРИ ВЕРНОМ ОТВЕТЕ ПОЛЬЗОВАТАЛЯ И МЕНЯЕТ КЛАСС НА "ПОЛУЧИВШИЙСЯ ЭЛЕМЕНТ"
 
 function animate() {
     let element2 = document.getElementById('element2');
-    // let currentClass = element2.getAttribute('class');
-
-    // element2.classList.remove('element', 'currentClass');
-
     element2.classList.remove(removeClass);
     element2.classList.add('magic');
 
@@ -127,4 +131,13 @@ function animate() {
         element2.classList.remove('magic');
         element2.classList.add(jsWin);
     }, 3000); // здесь 3000 - это время в миллисекундах, через которое нужно заменить класс
+}
+
+// ИГРОК ПРОШЕЛ ПОСЛЕДНИЙ УРОВЕНЬ, ЕМУ ВСПЛЫВАЕТ МОДАЛЬНОЕ ОКНО, КНОПКА "ЗАКРЫТЬ" обновляет страницу
+
+function theEnd() {
+    var close = document.getElementById("close");
+    close.addEventListener("click", function() { 
+        window.location.href = 'https://dp-osmanova.сделай.site/game/' + lastLevel;
+    });
 }

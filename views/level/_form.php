@@ -25,13 +25,9 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'property_id')->dropDownList($li) ?>
 
-    <?= $form->field($model, 'board')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'class')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'class2')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'selector')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'style')->textInput(['maxlength' => true]) ?>
 

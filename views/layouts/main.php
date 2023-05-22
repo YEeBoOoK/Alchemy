@@ -33,6 +33,22 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     <title><?= Html::encode($this->title) ?></title>
     <link rel="icon" href="/web/icon.svg">      
     <?php $this->head() ?>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(93671346, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/93671346" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
     
 </head>
 <body class="d-flex flex-column h-100">
@@ -69,28 +85,42 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
 
     } else {
         $user_id = Yii::$app->user->identity->id_user;
+
         $userResponse = UserResponse::find()
             ->where(['user_id' => $user_id, 'is_correct' => 1])
             ->orderBy(['level_id' => SORT_DESC])
+            ->one();
+
+        $totalLevel = Level::find()
+            ->where(['id_level' => Level::find()->select('id_level')])
+            ->orderBy(['id_level' => SORT_DESC])
             ->one();
 
         if(Yii::$app->user->identity->admin==1){
             $items[] = ['label' => 'Административная панель', 'url' => ['/admin/index']];
             $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
             $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
-            if ($nextLevelId = $userResponse !== null) {
-                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $userResponse->level_id + 1]];
+            if ((($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) <= $totalLevel->id_level)) {
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
+            } else if (($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) > $totalLevel->id_level) {
+                $nextLevel = $totalLevel->id_level;
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
             } else {
-                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevelId + 1]];
+                $nextLevel = 0;
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel + 1]];
             }
             
         } else {
             $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
             $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
-            if (($nextLevelId = $userResponse) !== null) {
-                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $userResponse->level_id + 1]];
+            if ((($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) <= $totalLevel->id_level)) {
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
+            } else if (($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) > $totalLevel->id_level) {
+                $nextLevel = $totalLevel->id_level;
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
             } else {
-                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevelId + 1]];
+                $nextLevel = 0;
+                $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel + 1]];
             }
         }
         $items[] = '<li class="nav-item">'

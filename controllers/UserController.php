@@ -35,6 +35,19 @@ class UserController extends Controller
         );
     }
 
+    public function beforeAction($action)
+    {
+        if ((Yii::$app->user->isGuest) && ($action->id == 'profile')) {
+            $this->redirect(['site/login']);
+            return false;
+        } 
+        // Запрещаю доступ (гостям и) зарегистрированным пользователям к странице с данными пользователей
+        if ((Yii::$app->user->isGuest || Yii::$app->user->identity->admin == 0) && ($action->id == 'index')) {
+            return $this->redirect(['site/login']);
+        } else return true;
+    }
+
+
     /**
      * Lists all User models.
      *

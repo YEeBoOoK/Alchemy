@@ -11,10 +11,8 @@ use Yii;
  * @property string $name_level
  * @property string $instruction
  * @property int|null $property_id
- * @property string $board
  * @property string|null $class
  * @property string|null $class2
- * @property string $selector
  * @property string $style
  * @property string $earlier
  * @property string $after
@@ -40,11 +38,10 @@ class Level extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_level', 'instruction', 'board', 'selector', 'style', 'earlier', 'after'], 'required'],
+            [['name_level', 'instruction', 'style', 'earlier', 'after'], 'required'],
             [['instruction', 'earlier', 'after'], 'string'],
             [['property_id'], 'integer'],
-            [['name_level', 'class', 'class2', 'selector', 'style', 'winClass'], 'string', 'max' => 255],
-            [['board'], 'string', 'max' => 50],
+            [['name_level', 'class', 'class2', 'style', 'winClass'], 'string', 'max' => 255],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => Property::class, 'targetAttribute' => ['property_id' => 'id_property']],
         ];
     }
@@ -59,10 +56,8 @@ class Level extends \yii\db\ActiveRecord
             'name_level' => 'Название',
             'instruction' => 'Инструкция',
             'property_id' => 'Объяснение',
-            'board' => 'Доска',
             'class' => 'Класс',
             'class2' => 'Класс2',
-            'selector' => 'Selector',
             'style' => 'Style',
             'earlier' => 'Текст до кода',
             'after' => 'Текст после',

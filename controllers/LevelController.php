@@ -33,6 +33,15 @@ class LevelController extends Controller
         );
     }
 
+    public function beforeAction($action)
+    {
+        if (Yii::$app->user->isGuest) {
+            $this->redirect(['site/login']);
+            return false;
+        } 
+        else return true;
+    }
+    
     /**
      * Lists all Level models.
      *
@@ -145,21 +154,6 @@ class LevelController extends Controller
         // $level = Yii::$app->request->get('id_level');
         $searchModel = new LevelSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        
-        // $levels = Level::find()->where(['id_level' > 0])->limit(1)->all();
-
-        // $levels = Level::find()->where(['>', 'id_level', 0])->limit(1)->one();
-
-        // $levels = Level::findOne();
-
-        // $id_user = Yii::$app->user->identity->id_user;
-
-
-        // $this->user_id = $id_user;
-        // $this->user_id = $id_user;
-        // $this->user_id = $id_user;
-
-        // $this->save(false);
 
         return $this->render('game', [
             // 'levels' => $levels,

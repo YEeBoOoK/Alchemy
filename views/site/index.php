@@ -1,5 +1,6 @@
 <?php
 use app\models\UserResponse;
+use app\models\Level;
 
 /** @var yii\web\View $this */
 
@@ -22,33 +23,40 @@ echo "<div class='site-index'>
                 <p>В этой игре вы будете создавать новые элементы на странице, применять к ним различные свойства CSS, и смотреть, как они меняются.</p>
                 <p> Начните играть прямо сейчас! Каждый уровень в Алхимии CSS предоставляет вам новые вызовы и задачи, которые помогут вам улучшить ваши навыки CSS.</p>
                 <p>Не бойтесь экспериментировать, ошибаться и учиться!</p>
+                <br>
+                <p class='cookie'>*Этот сайт использует сервис веб-аналитики Яндекс Метрика, предоставляемый компанией ООО «ЯНДЕКС». 
+                Сервис Яндекс Метрика использует технологию <code><b>“cookie”</b></code> — небольшие текстовые файлы, размещаемые на компьютере пользователей с целью анализа их пользовательской активности.</p>
             </div>
         </div>
 
         <div class='jumbotron mt-3 text-center bg-transparent'>";
         if (Yii::$app->user->isGuest) {
             echo "<div class='jumbotron mt-3 text-center bg-transparent'>
-            <p><a class='btn reg btn-lg' href='user/create'>Зарегистрироваться и играть</a></p>
+            <p><a class='reg' href='user/create'>Зарегистрироваться и играть</a></p>
             </div>
             </div>
             </div>";
         } else {
             echo "<div class='jumbotron mt-3 text-center bg-transparent'>";
-            $user_id = Yii::$app->user->identity->id_user;
-            // if ($user !== null) {
-            //     $user_id = $user->id_user;
+                $user_id = Yii::$app->user->identity->id_user;
+                $totalLevel = Level::find()
+                    ->where(['id_level' => Level::find()->select('id_level')])
+                    ->orderBy(['id_level' => SORT_DESC])
+                    ->one();
 
                 $userResponse = UserResponse::find()
                     ->where(['user_id' => $user_id, 'is_correct' => 1])
                     ->orderBy(['level_id' => SORT_DESC])
                     ->one();
 
-                if ($nextLevel = $userResponse !== null) {
-                    $nextLevel = $userResponse->level_id + 1;
-                    echo '<p><a class="btn reg btn-lg" href="game/'.$nextLevel.'"> Играть</a></p>';
+                if (($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) <= $totalLevel->id_level) {
+                    echo '<p><a class="reg" href="game/'.$nextLevel.'"> Играть</a></p>';
+                } else if (($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) > $totalLevel->id_level) {
+                    $nextLevel = $totalLevel->id_level;
+                    echo '<p><a class="reg" href="game/'.$nextLevel.'">Играть</a></p>';
                 } else {
                     $nextLevel = 1;
-                    echo '<p><a class="btn reg btn-lg" href="game/'.$nextLevel.'">Играть</a></p>';
+                    echo '<p><a class="reg" href="game/'.$nextLevel.'">Играть</a></p>';
                 }
             // }
             echo "</div>

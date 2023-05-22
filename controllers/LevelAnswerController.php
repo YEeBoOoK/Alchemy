@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use Yii;
+
 /**
  * LevelAnswerController implements the CRUD actions for LevelAnswer model.
  */
@@ -29,6 +31,14 @@ class LevelAnswerController extends Controller
                 ],
             ]
         );
+    }
+
+    public function beforeAction($action)
+    {
+        if ((Yii::$app->user->isGuest) || (Yii::$app->user->identity->admin == 0)) {
+            $this->redirect(['site/login']);
+            return false;
+        } else return true;
     }
 
     /**

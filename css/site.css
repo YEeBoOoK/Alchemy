@@ -97,6 +97,7 @@ a:hover {
   color: #ffffff;
 }
 
+
 .grid-view th {
     white-space: nowrap;
 }
@@ -162,71 +163,6 @@ li.breadcrumb-item.active {
 }
 
 
-
-/* .music-container {
-  text-align: center;
-}
-
-#play {
-  background-color: transparent;
-  color: #fff;
-  font-family: 'pixel', sans-serif;
-  display: inline-block;
-  padding: 0.4em 0.8em;
-  border: none;
-  border-radius: 4px;
-  line-height: 15px;
-  margin: auto 0;
-  width: 30px;
-}
-
-img.icon {
-  background-image: url("/web/img/sound.png");
-  height: 20px;
-  width: auto;
-  vertical-align: auto;
-
-} */
-
-
-
-/* Что-то вроде подсказки 
-    Может не надо         */
-/* .container-element{
-  display: grid;
-  grid-template-columns: repeat(5, 20%);
-}
-
-.element {
-  padding: 0 10px 30px;
-  font-size: 1.5em;
-  color: #fff;
-  margin: auto;
-}
-
-img.element {
-  width: 90px;
-  height: 90px;
-} */
-
-
-/* button#next:active {
-  outline: none;
-}
-
-button#next:not(.disabled):hover {
-  background-color: #7346b1;
-} */
-
-/* button#next:disabled {
-  background-color: #7d62a394;
-}
-
-button#next:disabled:hover {
-  background-color: #7d62a394;
-} */
-
-
 .bg-form {
   background-color: #0c09139a;
   padding: 15px;
@@ -235,3 +171,66 @@ button#next:disabled:hover {
 
 
 
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!! INDEX.PHP !!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.text {
+  background-color: #120c1d9a;
+  padding: 15px;
+  text-indent: 25px;
+  /* width: 75%; */
+  margin: 0 auto;
+}
+
+div.text p {
+  font-size: calc(10px + 8 * (100vw / 1280));
+}
+
+div.text p.cookie {
+  font-size: calc(7px + 8 * (100vw / 1280));
+}
+
+
+@media (min-width: 1400px) and (max-width: 2000px) { 
+  div.text p {
+      font-size: 20px;
+  }
+
+  div.text p.cookie {
+    font-size: 14px;
+}
+
+  .text {
+      background-color: #120c1d9a;
+      padding: 15px;
+      text-indent: 25px;
+      margin: 0 auto;
+      width: 80%;
+  }
+}
+
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!! DIRECTORY.PHP !!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.accordion {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.accordion-header {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #000 !important;
+  fill: #fff !important;
+}
+
+.directory-photo {
+  width: 800px;
+  max-width: 100%;
+  height: auto;
+}

@@ -23,7 +23,12 @@
     transition: 1.2s;
 }
 
-.reg:hover, .butt:hover {
+.reg:hover,
+.butt:hover,
+.reg:focus,
+.butt:focus,
+.reg:active,
+.butt:active {
     background-color: #502886;
     color: #fff;
 }

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Профиль', 'url' => ['profil
 // $this->params['breadcrumbs'][] = ['label' => $model->id_user, 'url' => ['view', 'id_user' => $model->id_user]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
-<div class="user-update">
+<div class="user-update bg-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
