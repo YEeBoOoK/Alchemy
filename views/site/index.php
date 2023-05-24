@@ -4,7 +4,7 @@ use app\models\Level;
 
 /** @var yii\web\View $this */
 
-$this->title = 'Alchemy CSS';
+$this->title = 'Alchemy CSS — веб-приложение для изучения CSS Grid';
 
 ?>
 

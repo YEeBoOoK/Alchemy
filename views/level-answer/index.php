@@ -27,10 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            // ['class' => 'yii\grid\SerialColumn'],
 
             // 'id',
             'level_id',
+            ['attribute'=>'Название уровня', 'value'=> function($data){return $data->getLevel()->One()->name_level;}],
             'answer',
             [
                 'class' => ActionColumn::className(),

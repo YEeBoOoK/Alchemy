@@ -42,7 +42,10 @@ class UserController extends Controller
             return false;
         } 
         // Запрещаю доступ (гостям и) зарегистрированным пользователям к странице с данными пользователей
-        if ((Yii::$app->user->isGuest || Yii::$app->user->identity->admin == 0) && ($action->id == 'index')) {
+        // if ((Yii::$app->user->isGuest || Yii::$app->user->identity->admin == 0 || Yii::$app->user->identity->admin==1) && ($action->id == 'index')) {
+        //     return $this->redirect(['site/login']);
+        // } else return true;
+        if ($action->id === 'index') {
             return $this->redirect(['site/login']);
         } else return true;
     }

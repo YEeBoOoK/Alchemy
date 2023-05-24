@@ -11,12 +11,12 @@ use yii\grid\GridView;
 /** @var app\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Профиль';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Alchemy CSS — Профиль';
+$this->params['breadcrumbs'][] = 'Профиль';
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="mb-3">Профиль</h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
     
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td class="user-data">'; 
 
                                 if (!$models) {
-                                    echo 'Завтра начну</td></tr></table>
+                                    echo 'Завтра начну (статус изменится)</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
@@ -70,17 +70,27 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
 
                                 if ($lastLevel >= 1 && $lastLevel < 3) {
-                                    echo 'Новичок</td></tr></table>
+                                    echo 'Помощник</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
                                 } else if ($lastLevel > 3 && $lastLevel <= 7) {
-                                    echo 'Быстро учусь</td></tr></table>
+                                    echo 'Маг Утренней Звезды</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
                                 } else if ($lastLevel > 7 && $lastLevel <= 12) {
-                                    echo 'Эксперт по гридам</td></tr></table>
+                                    echo 'Маг Сияющей Луны</td></tr></table>
+                                    <div class="text-center">
+                                        <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
+                                    </div>';
+                                } else if ($lastLevel > 12 && $lastLevel <= 15) {
+                                    echo 'Монарх Рассветной зари</td></tr></table>
+                                    <div class="text-center">
+                                        <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
+                                    </div>';
+                                } else if ($lastLevel > 15 && $lastLevel <= 20) {
+                                    echo 'Существо законов</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';

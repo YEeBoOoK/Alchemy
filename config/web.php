@@ -56,6 +56,7 @@ $config = [
                 'admin' => 'admin/index',
                 'directory' => 'site/directory',
                 'register' => 'user/create',
+                'user' => 'user/index',
                 'login' => 'site/login',
             ],
         ],

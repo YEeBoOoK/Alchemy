@@ -4,11 +4,11 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Справочник';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Alchemy CSS — Справочник';
+$this->params['breadcrumbs'][] = 'Справочник';
 ?>
 
-<h1 class="mb-3"><?= Html::encode($this->title) ?></h1>
+<h1 class="mb-3">Справочник</h1>
 
 <div class="accordion" id="accordionPanelsStayOpenExample">
   

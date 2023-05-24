@@ -12,15 +12,12 @@ use yii\grid\GridView;
 /** @var app\models\LevelSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Alchemy CSS';
-// $this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Alchemy CSS — веб-приложение для изучения CSS Grid';
+$this->params['breadcrumbs'][] = 'Alchemy CSS';
 
 echo '
-  <!-- Содержит контент веб-страницы. Контент, который должен отображаться на странице -->
-  <!--<body>-->
-  
   <div class="row">
-  <h1 class="title">' . Html::encode($this->title) . '</h1>
+  <h1 class="title">Alchemy CSS</h1>
   <div class="col">';
         
         $levels = $dataProvider->getModels();
@@ -124,7 +121,7 @@ echo '
                       <div id="level-counter"> 
 
                         <!-- Стрелка влева -->
-                        <span id="left" class="arrow left" onmousedown="back()">
+                        <span id="left" class="arrow left" title="Предыдущий уровень" onmousedown="back()">
                           <!--Треугольник-->
                           <span class="triangle"></span>
                         </span>
@@ -132,16 +129,16 @@ echo '
                         <!-- Индикатор уровня -->
                         <span id="level-indicator">
                           <!-- Текущий -->
-                          <span class="current">'.$level->id_level.'</span>
+                          <span class="current" title="Текущий уровень">'.$level->id_level.'</span>
                             <!-- Текст уровня -->
                             <span id="labelLevel">уровень из</span>
                             <!-- Всего -->
-                            <span class="total">'.$totalLevel->id_level.'</span>
+                            <span class="total" title="Последний уровень">'.$totalLevel->id_level.'</span>
                         <!-- <span class="caret">▾</span> -->
                           </span>
                         
                           <!-- Стрелка вправа -->
-                          <span id="right" class="arrow right" onmousedown="next()">
+                          <span id="right" class="arrow right" title="Следующий уровень" onmousedown="next()">
                             <!--Треугольник-->
                             <span class="triangle"></span>
                           </span>
@@ -153,7 +150,9 @@ echo '
 
               <div class="col">
               <section id="sidebar">';
-                  echo '<div id="instructions" class="text-instructions" title="'.app\models\Property::find()->one()->name_property . ": " . app\models\Property::find()->one()->definition .'">' . $level->instruction . '</div>';
+                $property = app\models\Property::findOne(['id_property' => $level->property_id]);
+
+                  echo '<div id="instructions" class="text-instructions" title="'.$property->name_property. ": " .$property->definition.'">' . $level->instruction . '</div>';
               echo '
               <div id="editor">
                 <div id="css" class="mt-3">

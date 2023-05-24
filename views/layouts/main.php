@@ -20,6 +20,11 @@ $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
+
+// $this->params['meta_description'] = 'Alchemy CSS — это веб-приложение, позволяющее в игровой форме изучить CSS Grid'; // Описание
+// $this->params['meta_keywords'] = 'CSS Grid, веб-приложение, grid-row, grid-column, z-index'; // Ключевые слова
+
+
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/web/icon.svg']);
 ?>
 <?php $this->beginPage() ?>
@@ -49,7 +54,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/93671346" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    
 </head>
 <body class="d-flex flex-column h-100">
 
