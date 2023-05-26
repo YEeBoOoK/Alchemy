@@ -97,7 +97,7 @@ class UserController extends Controller
                 $model->photo->saveAs('web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
                 $model->photo=('/web/UserPhoto/' . $model->photo->baseName . '_' .$time. '.' . $model->photo->extension);
             } else {
-                $model->photo=('/web/UserPhoto/UserImg.jpg');
+                $model->photo=('/web/UserPhoto/UserImg.png');
             }
 
             // $model->passwordConfirm = $model->password;

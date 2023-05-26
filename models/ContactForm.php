@@ -23,11 +23,16 @@ class ContactForm extends Model
     public function rules()
     {
         return [
-            // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
-            // email has to be a valid email address
+            // Поля обязательные для заполнения 
+            [['name', 'email', 'subject', 'body'], 'required', 'message' => 'Поле обязательно для заполнения'],
+            // Проверка поля электронной почты
             ['email', 'email'],
-            // verifyCode needs to be entered correctly
+
+            [['name'],'string', 'max' => 50], 
+            [['email'], 'string', 'max' => 50], 
+            [['body'], 'string', 'max' => 255],
+
+            // Капча
             ['verifyCode', 'captcha'],
         ];
     }
@@ -38,7 +43,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'verifyCode' => 'Введите текст с картинки',
+            'name' => 'Ваше имя/Username',
+            'email' => 'Email',
+            'subject' => 'Тема',
+            'body' => 'Сообщение',
         ];
     }
 
@@ -50,16 +59,44 @@ class ContactForm extends Model
     public function contact($email)
     {
         if ($this->validate()) {
-            Yii::$app->mailer->compose()
+            $message = Yii::$app->mailer->compose()
                 ->setTo($email)
-                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
-                ->setReplyTo([$this->email => $this->name])
+           //  ->setTo('test-t07z8k4z3@srv1.mail-tester.com')
+           //     ->setTo('forestmarket@yandex.ru')
+                // ->setFrom('admin@osmanova.xn--80ahdri7a.site')
+                ->setFrom([$this->email => $this->name])
                 ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
+                ->setTextBody($this->body);
 
-            return true;
+            if ($message->send()) {
+                return true;
+            }
         }
         return false;
+
+        // if ($this->validate()) {
+        //     $message = Yii::$app->mailer->compose()
+        //         ->setTo($email)
+        //         ->setFrom([$this->email => $this->name])
+        //         // ->setReplyTo([$this->email => $this->name])
+        //         ->setSubject($this->subject)
+        //         ->setTextBody($this->body);
+                
+        //         if ($message->send())  return true;
+        // }
+        // return false;
+
+        // if ($this->validate()) {    
+        //     Yii::$app->mailer->compose() 
+        //         ->setFrom([$this->email => $this->name]) /* от кого */
+        //         ->setTo($email) /* куда */
+        //         ->setSubject($this->subject) /* имя отправителя */
+        //         ->setTextBody($this->body) /* текст сообщения */
+        //         ->send(); /* функция отправки письма */
+
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     }
 }

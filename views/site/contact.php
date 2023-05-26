@@ -5,24 +5,25 @@
 /** @var app\models\ContactForm $model */
 
 use yii\bootstrap5\ActiveForm;
-use yii\bootstrap5\Html;
+use yii\helpers\Html;
 use yii\captcha\Captcha;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Alchemy CSS — Поддержка';
+$this->params['breadcrumbs'][] = 'Поддержка';
 ?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-contact bg-form">
+    <h1 class="mb-3">Поддержка</h1>
 
+    <!-- Условие отправления формы, если она отправлена выводим сообщение -->
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
         <div class="alert alert-success">
-            Thank you for contacting us. We will respond to you as soon as possible.
+            Благодарим Вас за обращение. Мы постараемся ответить Вам как можно скорее.
         </div>
 
         <p>
-            Note that if you turn on the Yii debugger, you should be able
-            to view the mail message on the mail panel of the debugger.
+            <!-- Note that if you turn on the Yii debugger, you should be able
+            to view the mail message on the mail panel of the debugger. -->
             <?php if (Yii::$app->mailer->useFileTransport): ?>
                 Because the application is in development mode, the email is not sent but saved as
                 a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
@@ -34,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else: ?>
 
         <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
+            Если у вас возникли вопросы, сложности или есть предложения по улучшению нашего веб-приложения, пожалуйста, заполните следующую форму, чтобы связаться с нами. 
+            Спасибо!
         </p>
 
         <div class="row">
@@ -56,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton('Отправить', ['class' => 'butt', 'name' => 'contact-button']) ?>
                     </div>
 
                 <?php ActiveForm::end(); ?>

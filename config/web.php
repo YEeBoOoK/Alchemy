@@ -28,12 +28,41 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
+         'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // 'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
-            // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'mail.osmanova.xn--80ahdri7a.site',
+                'username' => 'admin@osmanova.xn--80ahdri7a.site',
+                'password' => '-AI:g{S_-b0]Zm7r',
+                'port'=> 25,
+                'encryption'=> null,
+               //  'port' => 25,
+              //   'encryption' => null,
+             ],
         ],
+
+        // 'mailer' => [
+        //     'class' => 'yii\swiftmailer\Mailer',
+        //     'useFileTransport' => false, // Используйте true для сохранения писем в директории runtime/mail вместо отправки почты
+        // ],
+
+        // 'mailer' => [
+        //     'class' => 'yii\swiftmailer\Mailer',
+        //     'useFileTransport' => false,
+        //     'transport' => [
+        //             'class' => 'Swift_SmtpTransport',
+        //             'host'=>'mail.osmanova.xn--80ahdri7a.site',
+        //             'username'=>'css.alchemy@gmail.com',
+        //             'password'=>'96W-sdj-b4x-KL4',
+        //             'port'=>'587',
+        //             'encryption'=>'tls',
+        //         ],
+        // ],
+        
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -58,6 +87,7 @@ $config = [
                 'register' => 'user/create',
                 'user' => 'user/index',
                 'login' => 'site/login',
+                'contact' => 'site/contact',
             ],
         ],
 

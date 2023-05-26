@@ -1,4 +1,34 @@
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!! Верхняя часть страницы !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+/* Инструкция */
+#instructions {
+    padding-top: 1rem;
+}
+  
+#instructions,
+#instructions p,
+#instructions ul {
+    /* margin: 0; */
+    padding-bottom: 1em;
+    font-size: calc(7px + 7 * (100vw / 1280));
+}
+
+.text-instructions {
+    background-color: #0c09139a;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+code {
+    font-size: 0.875em;
+    color: #d9ff00;
+    word-wrap: break-word;
+}
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!! Правая часть страницы !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
@@ -54,7 +84,7 @@ input[type=range]::-webkit-slider-thumb {
     margin-left: 16px;
     border: none;
     font-family: 'Source Code Pro', monospace;
-    font-size: 16px;
+    font-size: 100%;
     outline: none;
     resize: none;
     overflow: hidden;
@@ -108,10 +138,6 @@ button#next {
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!! Левая часть страницы !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-
-#view {
-    padding: 1em;
-}
   
 /* Игровое поле */
 #board {
@@ -230,4 +256,209 @@ button#next {
 
 .right .triangle {
     border-left: 14px solid rgba(255, 255, 255, 0.7);
+}
+
+
+
+
+
+/* MEDIA */
+
+@media (min-width: 300px) and (max-width: 432px) {
+    #editor, pre {
+        font-size: 85%;
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    .line-numbers {
+        height: 100%;
+    }
+    
+    button#next {
+        font-size: 90%;
+    }
+
+    /* #view {
+        padding: 1em 0 1em 0;
+    }
+  
+    #board {
+        width: 80vw;
+        height: 70vw;
+        margin: auto;
+    }
+    
+    #level-counter {
+        font-size: 75%;
+    } */
+}
+
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+
+/* Игровое поле */
+@media (min-width: 454px) and (max-width: 991px) {
+    #view {
+        padding: 1em 0 1em 0;
+    }
+    
+    #board {
+        width: 70vw;
+        height: 60.8vw;
+        margin: auto;
+    }
+    
+    #level-counter{
+        font-size: 75%;
+    }
+    
+    #editor, pre {
+        /* font-size: 100%; */
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    #code {
+        /* font-size: 100%; */
+        height: 16px;
+        font-size: 85%;
+    }
+
+    #css {
+        height: 365px;
+    }
+
+    /* .element .bg,
+    .treatment .bg {
+        width: 100%;
+        height: 100%;
+        background-position: left top;
+        background-size: calc(16vw - 4px);
+    } */
+}
+@media (min-width: 435px) and (max-width: 454px) {
+    #board {
+        width: 74vw;
+        height: 60.8vw;
+        margin: auto;
+    }
+    
+    .element .bg,
+    .treatment .bg {
+        background-size: 13vw !important;
+    }
+
+    #view {
+        padding: 1em 0 1em 0;
+    }
+    
+    #level-counter{
+        font-size: 75%;
+    }
+    
+    #editor, pre {
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    #code {
+        height: 16px;
+        font-size: 85%;
+    }
+
+    #css {
+        height: 365px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 434px) {
+    #board {
+        width: 77vw;
+        height: 60.8vw;
+        margin: auto;
+    }
+
+    #level-counter{
+        font-size: 75%;
+    }
+
+    #css {
+        height: 365px;
+    }
+
+    #editor, pre {
+        line-height: 1.3;
+        font-size: 85%;
+    }
+
+    .element .bg,
+    .treatment .bg {
+        /* background-size: 13vw !important; */
+        background-size: calc(16vw - 7px) !important;
+    }
+}
+
+@media (min-width: 350px) and (max-width: 399px) {
+    #board {
+        width: 63vw;
+        height: 68.4vw;
+        margin: auto;
+        min-height: 250px;
+    }
+
+    #level-counter{
+        font-size: 75%;
+    }
+
+    #css {
+        height: 365px;
+    }
+
+    #editor, pre {
+        line-height: 1.3;
+        font-size: 85%;
+    }
+
+    .element .bg,
+    .treatment .bg {
+        /* background-size: 13vw !important; */
+        background-size: calc(16vw - 7px) !important;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 349px) {
+    #board {
+        width: 63vw;
+        height: 78.16vw;
+        margin: auto;
+        min-height: 250px;
+    }
+
+    #level-counter{
+        font-size: 75%;
+    }
+
+    #css {
+        height: 365px;
+    }
+
+    #editor, pre {
+        line-height: 1.3;
+        font-size: 85%;
+    }
+
+    .element .bg,
+    .treatment .bg {
+        /* background-size: 13vw !important; */
+        background-size: calc(18vw - 7px) !important;
+    }
 }

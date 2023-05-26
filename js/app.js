@@ -81,7 +81,7 @@ function addAnswer(level_id, style) {
             }, 3500);
         } else {
             title.innerText = 'Информационное сообщение';
-            body.innerHTML = '<p>Вы не глупий, но ответ глупий</p>';
+            body.innerHTML = '<p>К сожалению, ответ пока неверен, но мы уверены, Вы на верном пути!<br> Не сдавайтесь и у Вас обязательно все получится!</p>';
             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {}); 
             myModal.show(); 
         } 

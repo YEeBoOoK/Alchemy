@@ -20,22 +20,23 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/profile.css',
-        'css/game.css',
-        'css/fonts.css',
-        'css/playingField.css',
-        'css/animations.css',
-        'css/media.css',
-        'css/buttons.css',
-        'css/elements.css',
-        'css/style.css',
-        'css/preloader.css',
         'css/admin.css',
+        'css/animations.css',
+        'css/buttons.css',
+        'css/cookie.css',
+        'css/elements.css',
+        'css/fonts.css',
+        // 'css/media.css',
+        'css/playingField.css',
+        'css/preloader.css',
+        'css/profile.css',
+        'css/site.css',
+        'css/style.css',
     ];
     public $js = [
         'js/app.js',
         'js/preloader.js',
+        'js/cookie.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

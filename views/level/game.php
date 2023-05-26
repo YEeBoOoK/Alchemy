@@ -13,12 +13,11 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Alchemy CSS — веб-приложение для изучения CSS Grid';
-$this->params['breadcrumbs'][] = 'Alchemy CSS';
+// $this->params['breadcrumbs'][] = 'Alchemy CSS';
 
 echo '
   <div class="row">
-  <h1 class="title">Alchemy CSS</h1>
-  <div class="col">';
+  <h1 class="title">Alchemy CSS</h1>';
         
         $levels = $dataProvider->getModels();
         $id_level = Yii::$app->request->get('id_level');
@@ -46,8 +45,11 @@ echo '
         
         foreach ($levels as $level) {
           if ($level->id_level == $id_level) {
+            $property = app\models\Property::findOne(['id_property' => $level->property_id]);
             echo '
-              <section id="view">
+            <div id="instructions" class="text-instructions m-2" title="'.$property->name_property. ": " .$property->definition.'">' . $level->instruction . '</div>
+            <div class="col">
+              <section class="py-2">
                 <div id="board">
                   <div id="overlay">
                     <span class="piece"></span>
@@ -148,18 +150,14 @@ echo '
               </section>
               </div>
 
-              <div class="col">
-              <section id="sidebar">';
-                $property = app\models\Property::findOne(['id_property' => $level->property_id]);
-
-                  echo '<div id="instructions" class="text-instructions" title="'.$property->name_property. ": " .$property->definition.'">' . $level->instruction . '</div>';
-              echo '
-              <div id="editor">
-                <div id="css" class="mt-3">
-                  <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15</div>
-                  <pre id="before">'.$level->earlier.'</pre>
-                  <textarea id="code" autofocus autocapitalize="none"></textarea>
-                  <pre id="after">'.$level->after.'</pre>
+              <div class="col p-0">
+              <section id="sidebar">
+                <div id="editor">
+                  <div id="css" class="mt-2">
+                    <div class="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15</div>
+                    <pre id="before">'.$level->earlier.'</pre>
+                    <textarea id="code" autofocus autocapitalize="none"></textarea>
+                    <pre id="after">'.$level->after.'</pre>
                 </div>';
 
                 $models = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id]) -> all();

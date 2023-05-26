@@ -16,23 +16,20 @@ use app\models\Level;
 AppAsset::register($this);
 
 $this->registerCsrfMetaTags();
+
+$this->params['meta_description'] = 'Alchemy CSS — это веб-приложение, позволяющее в игровой форме изучить CSS Grid'; // Описание
+$this->params['meta_keywords'] = 'CSS Grid, веб-приложение, grid-row, grid-column, z-index'; // Ключевые слова
+
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 
-// $this->params['meta_description'] = 'Alchemy CSS — это веб-приложение, позволяющее в игровой форме изучить CSS Grid'; // Описание
-// $this->params['meta_keywords'] = 'CSS Grid, веб-приложение, grid-row, grid-column, z-index'; // Ключевые слова
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/web/icon.svg']);?>
 
-
-$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/web/icon.svg']);
-?>
 <?php $this->beginPage() ?>
-<!-- Все что находится за пределами, не воспринимается браузером как HTML-код и не обрабатывается -->
 <!DOCTYPE html>
-<!-- Атрибут lang указывает на каком языке написан текст страницы -->
 <html lang="<?= Yii::$app->language ?>" class="h-100">
-<!-- Предназначен для хранения заголовка, описания, кодировки и т. д. Не отображается в окне браузера, содержит данные, указывающие браузеру как следует обрабатывать страницу -->
 <head>
     <!-- Заголовок, отображающийся на вкладке -->
     <title><?= Html::encode($this->title) ?></title>
@@ -84,6 +81,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     
     if (Yii::$app->user->isGuest){
         $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
+        $items[] = ['label' => 'Поддержка', 'url' => ['/site/contact']];
         $items[] = ['label' => 'Регистрация', 'url' => ['/user/create']];
         $items[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
 
@@ -113,7 +111,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
                 $nextLevel = 0;
                 $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel + 1]];
             }
-            
         } else {
             $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
             $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
@@ -126,6 +123,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
                 $nextLevel = 0;
                 $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel + 1]];
             }
+            $items[] = ['label' => 'Поддержка', 'url' => ['/site/contact']];
         }
         $items[] = '<li class="nav-item">'
             . Html::beginForm(['/site/logout'])
@@ -159,6 +157,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
 
 
 <footer id="footer" class="mt-auto py-3">
+    <!-- Модальное окошко -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bskeyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -175,6 +174,27 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
         </div>
     </div>
 
+    <!-- Согласие с куки -->
+    <div id="cookie_alert">
+        <div class="row">
+
+            <div class="col-lg-10">
+                <p class="cookie text-dark mb-1">
+                    Продолжая работу с сайтом, Вы разрешаете использование cookie-файлов
+                    Вы всегда можете отключить файлы cookie в настройках Вашего браузера.
+                </p>
+            </div>
+
+            <div class="col-lg-2 text-end">
+                <button class="cookie_butt" id="cookie_alert-close">Принять</button>   
+            </div>
+        </div>
+
+        
+        
+    </div>
+
+    <!-- "Компания" -->
     <div class="container">
         <div class="row text-muted">
             <div class="col text-center text-light">&copy; Alchemy CSS <?= date('Y') ?></div>

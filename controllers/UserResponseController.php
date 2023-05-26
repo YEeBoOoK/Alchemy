@@ -9,6 +9,7 @@ use app\models\UserResponseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+// use yii\base\Request;
 
 use Yii;
 
@@ -102,7 +103,6 @@ class UserResponseController extends Controller
         }
 
         if (!$responseFound) {
-            
             $model = new UserResponse();
             $model->user_id = $user_id;
             $model->level_id = $level_id;
@@ -117,21 +117,19 @@ class UserResponseController extends Controller
                     break;
                 } 
                 // else {
-                //     // ответ неправильный, выполняем необходимые действия
-                //     if (!$model->save()) return false;
+                //     $models->is_correct = 0;
+                //     return false; // Возвращаем ошибку, если ответ неверный
                 // }
             }
 
-            // $is_correct = Yii::$app->request->post('is_correct');
             if (!$model->save()) return false;
         }
         
-        // return $is_correct;
-        // echo $is_correct;
         // Возвращаем значение $is_correct в формате JSON
         return json_encode(['is_correct' => $is_correct]);
-
     }
+    
+
 
     /**
      * Updates an existing UserResponse model.

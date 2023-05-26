@@ -39,6 +39,7 @@ body {
     padding-left: 15px;
 }
 
+
 .not-set {
     color: #c55;
     font-style: italic;
@@ -187,19 +188,11 @@ div.text p {
   font-size: calc(10px + 8 * (100vw / 1280));
 }
 
-div.text p.cookie {
-  font-size: calc(7px + 8 * (100vw / 1280));
-}
-
 
 @media (min-width: 1400px) and (max-width: 2000px) { 
   div.text p {
       font-size: 20px;
   }
-
-  div.text p.cookie {
-    font-size: 14px;
-}
 
   .text {
       background-color: #120c1d9a;
@@ -233,4 +226,10 @@ div.text p.cookie {
   width: 800px;
   max-width: 100%;
   height: auto;
+}
+
+.accordion-body code {
+    font-size: 0.875em;
+    color: #8d0000;
+    word-wrap: break-word;
 }

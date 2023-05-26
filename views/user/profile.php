@@ -51,10 +51,10 @@ $this->params['breadcrumbs'][] = 'Профиль';
                         <tr>
                             <th scope="row"></th>
                             <td class="user-data">Статус:</td>
-                            <td class="user-data">'; 
+                            <td class="user-data" title="*Проходите уровни, чтобы сменить статус!">'; 
 
                                 if (!$models) {
-                                    echo 'Завтра начну (статус изменится)</td></tr></table>
+                                    echo 'Архимаг Лени*</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
@@ -69,27 +69,27 @@ $this->params['breadcrumbs'][] = 'Профиль';
                                     }
                                 }
 
-                                if ($lastLevel >= 1 && $lastLevel < 3) {
-                                    echo 'Помощник</td></tr></table>
+                                if ($lastLevel = 1) {
+                                    echo 'Мастер Иллюзий</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
-                                } else if ($lastLevel > 3 && $lastLevel <= 7) {
-                                    echo 'Маг Утренней Звезды</td></tr></table>
+                                } else if ($lastLevel = 2) {
+                                    echo 'Маг Хитрых Перевоплощений</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
-                                } else if ($lastLevel > 7 && $lastLevel <= 12) {
-                                    echo 'Маг Сияющей Луны</td></tr></table>
+                                } else if ($lastLevel = 3) {
+                                    echo 'Профессор Пузырьковых Экспериментов</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
-                                } else if ($lastLevel > 12 && $lastLevel <= 15) {
-                                    echo 'Монарх Рассветной зари</td></tr></table>
+                                } else if ($lastLevel = 4) {
+                                    echo 'Маг Хронически Запутанных Кабелей</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>
                                     </div>';
-                                } else if ($lastLevel > 15 && $lastLevel <= 20) {
+                                } else if ($lastLevel = 5) {
                                     echo 'Существо законов</td></tr></table>
                                     <div class="text-center">
                                         <a class="update-btn w-100" href="/user/update?id_user='.$id_user.'">Редактировать</a>

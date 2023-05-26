@@ -38,7 +38,7 @@ class RegForm extends User
 
             [['email'], 'unique', 'message' => 'Данный email-адрес уже используется'],
             [['username'], 'unique', 'message' => 'Данное имя пользователя уже занято'],
-            [['email'], 'email', 'message' => 'Введите корректный email-адрес (например: test@gmail.com)'],
+            ['email', 'email', 'message' => 'Введите корректный email-адрес (например: test@gmail.com)'],
             ['username', 'match', 'pattern' => '/^[A-Za-z0-9]{5,}$/u', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита и цифры, минимум 5 символов'],
             ['password', 'match', 'pattern' => '/^[a-zA-Z0-9]{8,}$/u', 'message' => 'Пароль должен содержать буквы латинского алфавита и цифры, минимум 8 символов'],
             ['passwordConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли должны совпадать'],
