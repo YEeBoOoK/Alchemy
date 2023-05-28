@@ -3,14 +3,9 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 /* Инструкция */
-#instructions {
-    padding-top: 1rem;
-}
+#instructions {padding-top: 1rem;}
   
-#instructions,
-#instructions p,
-#instructions ul {
-    /* margin: 0; */
+#instructions, #instructions p, #instructions ul {
     padding-bottom: 1em;
     font-size: calc(7px + 7 * (100vw / 1280));
 }
@@ -33,12 +28,9 @@ code {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 /* Редактор кода */
-#editor {
-    position: relative;
-}
+#editor {position: relative;}
   
-#editor,
-pre {
+#editor, pre {
     font-family: 'Source Code Pro', monospace;
     font-size: 100%;
     line-height: 1.5;
@@ -88,7 +80,6 @@ input[type=range]::-webkit-slider-thumb {
     outline: none;
     resize: none;
     overflow: hidden;
-    /* overflow: auto; */
 }
 
 /* Кнопка дальше */
@@ -116,10 +107,6 @@ button#next {
     right: 1em;
     bottom: 1em;
     padding-top: 0.3em;
-}
-  
-  #next.disabled {
-    opacity: 0.5;
 }
 
 /* Циферки */
@@ -151,21 +138,10 @@ button#next {
     max-height: calc(100vh - 2em);
     border: 12px solid #996b3d;
     border-bottom: 40px solid #996b3d;
-    /* border-radius: 50px; */
-    /* overflow: hidden; */
-    /* #6D5720 
-        #6a5f40
-        #4c3900
-        #B9824A
-        #996b3d
-    */
 }
   
 /* Ячейки игрового поля */
-#element02,
-#element,
-#surface,
-#overlay {
+#element02, #element, #surface, #overlay {
     display: grid;
     grid-template-columns: repeat(5, 20%);
     grid-template-rows: repeat(4, 25%);
@@ -175,12 +151,7 @@ button#next {
     width: 100%;
     height: 100%;
 }
-  
-/* .current, .total {
-    font-family: 'Source Code Pro', monospace;
-} */
 
-  
 /* Не знаю, что это */
 #surface {
     background-color: #523D1F;
@@ -193,7 +164,6 @@ button#next {
     height: 100%;
     background-image: url("/web/img/wood.png");
     background-size: calc(10vw - 1px);
-    /* background-color: #ccb580; */
 }
   
 /* Полоски между квадратиками */
@@ -201,31 +171,7 @@ button#next {
     z-index: 50;
     background: none;
     box-shadow: inset 5px 5px 0 rgb(255 255 255 / 5%), inset -2px -2px 0 #854e0033;
-    /* #665235 
-        #cbad82
-    */
 }
-  
-/* #element02 {
-    z-index: 40;
-} */
-  
-/* .element,
-.treatment {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-} */
-  
-/* .element .bg,
-.treatment .bg {
-    width: 100%;
-    height: 100%;
-    background-position: left top;
-    background-size: calc(10vw - 4px);
-} */
-  
 
 /* Счетчик уровней */
 #level-counter {
@@ -250,20 +196,11 @@ button#next {
 }
 
 /* Ширина стрелок */
-.left .triangle {
-    border-right: 14px solid rgba(255, 255, 255, 0.7);
-}
-
-.right .triangle {
-    border-left: 14px solid rgba(255, 255, 255, 0.7);
-}
-
-
-
+.left .triangle {border-right: 14px solid rgba(255, 255, 255, 0.7);}
+.right .triangle {border-left: 14px solid rgba(255, 255, 255, 0.7);}
 
 
 /* MEDIA */
-
 @media (min-width: 300px) and (max-width: 432px) {
     #editor, pre {
         font-size: 85%;
@@ -271,27 +208,12 @@ button#next {
         margin: 0;
     }
     
-    .line-numbers {
-        height: 100%;
-    }
-    
-    button#next {
-        font-size: 90%;
-    }
+    .line-numbers {height: 100%;}
+    button#next {font-size: 90%;}
 
-    /* #view {
-        padding: 1em 0 1em 0;
-    }
-  
-    #board {
-        width: 80vw;
-        height: 70vw;
-        margin: auto;
-    }
-    
-    #level-counter {
-        font-size: 75%;
-    } */
+    /* #view {padding: 1em 0 1em 0;}
+    #board {width: 80vw;height: 70vw;margin: auto;}
+    #level-counter {font-size: 75%;} */
 }
 
 
@@ -307,9 +229,7 @@ button#next {
 
 /* Игровое поле */
 @media (min-width: 454px) and (max-width: 991px) {
-    #view {
-        padding: 1em 0 1em 0;
-    }
+    #view {padding: 1em 0 1em 0;}
     
     #board {
         width: 70vw;
@@ -317,33 +237,19 @@ button#next {
         margin: auto;
     }
     
-    #level-counter{
-        font-size: 75%;
-    }
-    
+    #level-counter{font-size: 75%;}
+
     #editor, pre {
-        /* font-size: 100%; */
         line-height: 1.5;
         margin: 0;
     }
 
     #code {
-        /* font-size: 100%; */
         height: 16px;
         font-size: 85%;
     }
-
-    #css {
-        height: 365px;
-    }
-
-    /* .element .bg,
-    .treatment .bg {
-        width: 100%;
-        height: 100%;
-        background-position: left top;
-        background-size: calc(16vw - 4px);
-    } */
+    
+    #css {height: 365px;}
 }
 @media (min-width: 435px) and (max-width: 454px) {
     #board {
@@ -352,18 +258,10 @@ button#next {
         margin: auto;
     }
     
-    .element .bg,
-    .treatment .bg {
-        background-size: 13vw !important;
-    }
+    .element .bg, .treatment .bg {background-size: 13vw !important;}
 
-    #view {
-        padding: 1em 0 1em 0;
-    }
-    
-    #level-counter{
-        font-size: 75%;
-    }
+    #view {padding: 1em 0 1em 0;}
+    #level-counter{font-size: 75%;}
     
     #editor, pre {
         line-height: 1.5;
@@ -375,9 +273,7 @@ button#next {
         font-size: 85%;
     }
 
-    #css {
-        height: 365px;
-    }
+    #css {height: 365px;}
 }
 
 @media (min-width: 400px) and (max-width: 434px) {
@@ -387,24 +283,16 @@ button#next {
         margin: auto;
     }
 
-    #level-counter{
-        font-size: 75%;
-    }
+    #level-counter{font-size: 75%;}
 
-    #css {
-        height: 365px;
-    }
+    #css {height: 365px;}
 
     #editor, pre {
         line-height: 1.3;
         font-size: 85%;
     }
 
-    .element .bg,
-    .treatment .bg {
-        /* background-size: 13vw !important; */
-        background-size: calc(16vw - 7px) !important;
-    }
+    .element .bg, .treatment .bg {background-size: calc(16vw - 7px) !important;}
 }
 
 @media (min-width: 350px) and (max-width: 399px) {
@@ -415,24 +303,11 @@ button#next {
         min-height: 250px;
     }
 
-    #level-counter{
-        font-size: 75%;
-    }
+    #level-counter{font-size: 75%;}
+    #css {height: 365px;}
+    #editor, pre {line-height: 1.3; font-size: 85%;}
 
-    #css {
-        height: 365px;
-    }
-
-    #editor, pre {
-        line-height: 1.3;
-        font-size: 85%;
-    }
-
-    .element .bg,
-    .treatment .bg {
-        /* background-size: 13vw !important; */
-        background-size: calc(16vw - 7px) !important;
-    }
+    .element .bg, .treatment .bg {background-size: calc(16vw - 7px) !important;}
 }
 
 @media (min-width: 300px) and (max-width: 349px) {
@@ -443,22 +318,10 @@ button#next {
         min-height: 250px;
     }
 
-    #level-counter{
-        font-size: 75%;
-    }
+    #level-counter{font-size: 75%;}
+    #css {height: 365px;}
 
-    #css {
-        height: 365px;
-    }
+    #editor, pre {line-height: 1.3; font-size: 85%;}
 
-    #editor, pre {
-        line-height: 1.3;
-        font-size: 85%;
-    }
-
-    .element .bg,
-    .treatment .bg {
-        /* background-size: 13vw !important; */
-        background-size: calc(18vw - 7px) !important;
-    }
+    .element .bg, .treatment .bg {background-size: calc(18vw - 7px) !important;}
 }

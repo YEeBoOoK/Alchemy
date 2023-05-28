@@ -79,8 +79,10 @@ class UserResponseController extends Controller
     {
         $user_id = Yii::$app->user->identity->id_user;
         $level_id = Yii::$app->request->post('level_id');
-        $newResponse=Yii::$app->request->post('response');
         $level = Level::findOne($level_id);
+
+        $newResponse=Yii::$app->request->post('response');
+        
         if (!$level) return false;
         
         $models = UserResponse::find()->where(['level_id' => $level_id, 'user_id' => $user_id]) -> all();
@@ -88,45 +90,27 @@ class UserResponseController extends Controller
         
         if ($models === null) return false;
 
-        $responseFound = false;
         $is_correct = 0;
 
         // проверяем, существует ли ответ в базе данных
-        foreach ($models as $model) {
-            // ответ на данный уровень уже существует, сравниваем с новым ответом
-            if ($model->response == $newResponse) {
-                // ответы совпадают
-                $model->save(false);
-                $responseFound = true;
+        foreach ($correctAnswers as $correctAnswer) {
+            if ($newResponse === $correctAnswer->answer) {
+                $model = new UserResponse();
+                $model->user_id = $user_id;
+                $model->level_id = $level_id;
+                $model->response = $newResponse;
+                $model->is_correct = 1;
+
+                if (!$model->save()) {
+                    return false; // Если не удалось сохранить модель, возвращаем false
+                }
+
+                $is_correct = 1;
                 break;
-            } 
-        }
-
-        if (!$responseFound) {
-            $model = new UserResponse();
-            $model->user_id = $user_id;
-            $model->level_id = $level_id;
-            $model->response = $newResponse;
-
-            // проверяем, является ли ответ правильным
-            foreach ($correctAnswers as $correctAnswer) {
-                if ($newResponse === $correctAnswer->answer) {
-                // ответ правильный, выполняем необходимые действия
-                    $model->is_correct = 1;
-                    $is_correct = 1;
-                    break;
-                } 
-                // else {
-                //     $models->is_correct = 0;
-                //     return false; // Возвращаем ошибку, если ответ неверный
-                // }
             }
+    }
 
-            if (!$model->save()) return false;
-        }
-        
-        // Возвращаем значение $is_correct в формате JSON
-        return json_encode(['is_correct' => $is_correct]);
+    return json_encode(['is_correct' => $is_correct]);
     }
     
 

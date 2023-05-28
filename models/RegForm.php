@@ -14,16 +14,14 @@ use Yii;
  * @property string $email
  * @property string $username
  * @property string $password
- * @property string $passwordConfirm
- * @property int $agree
  * @property int $admin
  */
 class RegForm extends User
 {
 
     // Объявляем 2 новые публичные переменные для подтверждения пароля и согласия на обработку данных
-    // public $passwordConfirm;
-    // public $agree;
+    public $passwordConfirm;
+    public $agree;
 
     /**
      * {@inheritdoc}
@@ -39,7 +37,7 @@ class RegForm extends User
             [['email'], 'unique', 'message' => 'Данный email-адрес уже используется'],
             [['username'], 'unique', 'message' => 'Данное имя пользователя уже занято'],
             ['email', 'email', 'message' => 'Введите корректный email-адрес (например: test@gmail.com)'],
-            ['username', 'match', 'pattern' => '/^[A-Za-z0-9]{5,}$/u', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита и цифры, минимум 5 символов'],
+            [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9_-]{5,}$/', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита, цифры, дефисы и подчеркивания'],
             ['password', 'match', 'pattern' => '/^[a-zA-Z0-9]{8,}$/u', 'message' => 'Пароль должен содержать буквы латинского алфавита и цифры, минимум 8 символов'],
             ['passwordConfirm', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли должны совпадать'],
             ['agree', 'compare', 'compareValue' => true, 'message' => ''],

@@ -13,8 +13,6 @@ use Yii;
  * @property string $email
  * @property string $username
  * @property string $password
- * @property string $passwordConfirm
- * @property int $agree
  * @property int $admin
  *
  * @property UserResponse[] $userResponses
@@ -29,7 +27,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return 'user';
     }
 
-    // public $userPhoto;
+    // public $agree;
+    // public $passwordConfirm;
 
     /**
      * {@inheritdoc}
@@ -37,13 +36,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'username', 'password', 'passwordConfirm'], 'required'],
-            [['agree', 'admin'], 'integer'],
+            [['email', 'username', 'password'], 'required'],
+            [['admin'], 'integer'],
             [['email', 'username', 'password'], 'string', 'max' => 255],
-            [['email'], 'unique'],
-            [['username'], 'unique'],
+            [['email'], 'unique', 'message' => 'Данный email-адрес уже используется'],
+            [['username'], 'unique', 'message' => 'Данное имя пользователя уже занято'],
+            [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9_-]{5,}$/', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита, цифры, дефисы и подчеркивания'],
 
-            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 5*1024*1024, 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg. Максимальный допустимый размер файла 10 МБ'],
+            [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 5*1024*1024, 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg. Максимальный допустимый размер файла 5 МБ'],
         ];
     }
 
@@ -58,8 +58,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => 'Email',
             'username' => 'Username',
             'password' => 'Пароль',
-            'passwordConfirm' => 'Подтверждение пароля',
-            'agree' => 'Я даю согласие на обработку данных',
             // 'userPhoto' => 'Фотография (не обязательно)',
             // 'admin' => 'Админ',
         ];

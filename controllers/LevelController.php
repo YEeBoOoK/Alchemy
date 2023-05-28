@@ -160,8 +160,5 @@ class LevelController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-
-
-
     }
 }

@@ -38,30 +38,12 @@ $config = [
                 'host' => 'mail.osmanova.xn--80ahdri7a.site',
                 'username' => 'admin@osmanova.xn--80ahdri7a.site',
                 'password' => '-AI:g{S_-b0]Zm7r',
-                'port'=> 25,
-                'encryption'=> null,
+                'port'=> 465,
+                'encryption'=> 'ssl',
                //  'port' => 25,
               //   'encryption' => null,
              ],
         ],
-
-        // 'mailer' => [
-        //     'class' => 'yii\swiftmailer\Mailer',
-        //     'useFileTransport' => false, // Используйте true для сохранения писем в директории runtime/mail вместо отправки почты
-        // ],
-
-        // 'mailer' => [
-        //     'class' => 'yii\swiftmailer\Mailer',
-        //     'useFileTransport' => false,
-        //     'transport' => [
-        //             'class' => 'Swift_SmtpTransport',
-        //             'host'=>'mail.osmanova.xn--80ahdri7a.site',
-        //             'username'=>'css.alchemy@gmail.com',
-        //             'password'=>'96W-sdj-b4x-KL4',
-        //             'port'=>'587',
-        //             'encryption'=>'tls',
-        //         ],
-        // ],
         
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -78,14 +60,13 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                // 'game/<id_level:\d+>' => 'level/game',
-                // 'level/game' => 'level/game/<id_level:\d+>',
                 'game/<id_level:\d+>' => 'level/game',
                 'profile' => 'user/profile',
                 'admin' => 'admin/index',
                 'directory' => 'site/directory',
                 'register' => 'user/create',
                 'user' => 'user/index',
+                'update' => 'user/update',
                 'login' => 'site/login',
                 'contact' => 'site/contact',
             ],

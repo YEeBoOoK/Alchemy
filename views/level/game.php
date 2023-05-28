@@ -13,29 +13,30 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Alchemy CSS — веб-приложение для изучения CSS Grid';
-// $this->params['breadcrumbs'][] = 'Alchemy CSS';
 
 echo '
   <div class="row">
   <h1 class="title">Alchemy CSS</h1>';
-        
         $levels = $dataProvider->getModels();
         $id_level = Yii::$app->request->get('id_level');
         $user_id = Yii::$app->user->identity->id_user;
-
 
         $totalLevel = Level::find()
         ->where(['id_level' => Level::find()->select('id_level')])
         ->orderBy(['id_level' => SORT_DESC])
         ->one();
-
+        
         $level = Level::find()->where(['id_level' => $id_level])->one();
-        $winClass = $level->winClass;
-        $removeClass = $level->class2;
 
-        $userResponse = UserResponse::find()->where(['level_id' => $id_level, 'user_id' => $user_id])->one();
-        // $correct = $userResponse->is_correct;
-        //  let correct = '$correct';
+        if (!$level) {
+          $redirectUrl = Url::to(['game/1']);
+          Yii::$app->response->redirect($redirectUrl);
+          Yii::$app->end();
+        } else {
+          $winClass = $level->winClass;
+          $removeClass = $level->class2;
+        }
+
         echo "<script>
                 let currentLevel = $id_level;
                 let jsWin = '$winClass';
@@ -47,7 +48,7 @@ echo '
           if ($level->id_level == $id_level) {
             $property = app\models\Property::findOne(['id_property' => $level->property_id]);
             echo '
-            <div id="instructions" class="text-instructions m-2" title="'.$property->name_property. ": " .$property->definition.'">' . $level->instruction . '</div>
+            <div id="instructions" class="text-instructions m-2" >' . $level->instruction . '</div>
             <div class="col">
               <section class="py-2">
                 <div id="board">
@@ -166,7 +167,6 @@ echo '
                 if (!$models) {
                   echo '<button onclick="applyStyle()" id="next" data-correct="' . $is_correct . '">Проверить</button>'; 
                 } else {
-                  $is_last_level = true; // Предполагаем, что пользователь прошел последний уровень
 
                   foreach ($models as $model) {
                     if (($model->is_correct == 1) && ($model->level_id < $totalLevel->id_level)) {
@@ -176,26 +176,14 @@ echo '
                     } 
                   }
                     
-                    if ($is_last_level && ($model->level_id == $totalLevel->id_level)) {
+                    if ($model->level_id == $totalLevel->id_level) {
                       echo '<p class="bg-dark px-3 py-2 text-success text-end">Вы прошли последний уровень</p>';
                     } else if (!$is_correct) {
                     echo '<button onclick="applyStyle()" id="next" data-correct="' . $is_correct . '">Проверить</button>'; 
                   }
                 }
 
-                echo "<script>
-                        let correct = $is_correct;
-                      </script>";
-
-              echo '</div>';
-            }}
-
-            echo "
-            </section>
-            <!--</div>-->
-
-              <!--</div>-->
-              
-
-              <!--<script src='node_modules/jquery/dist/jquery.min.js'></script>-->";
+                echo "<script>let correct = $is_correct;</script>";
+                echo '</div>';}}
+                echo "</section>";
 ?>

@@ -101,9 +101,18 @@ class UserController extends Controller
             }
 
             // $model->passwordConfirm = $model->password;
-            if ($model->save()) {
-                Yii::$app->user->login($model);
-                return $this->redirect(['/user/profile']);
+            if ($model->validate()) {
+                $user = new User();
+                $user->photo = $model->photo;
+                $user->email = $model->email;
+                $user->username = $model->username;
+                $user->password = Yii::$app->getSecurity()->generatePasswordHash($model->password); 
+                // $user->passwordConfirm = \Yii::$app->getSecurity()->generatePasswordHash($model->password); 
+
+                if ($user->save()) {
+                    Yii::$app->user->login($user);
+                    return $this->redirect(['/user/profile']);
+                }
             }
             
             
@@ -126,11 +135,10 @@ class UserController extends Controller
     {
         $model = $this->findModel($id_user);
         $time = time();
-        // $user = User::find()->where(['id_user' => $id_user])->one();
-        // $photo = $user->photo;
 
         $userPhoto = $model->photo;
-
+        $currentPassword = $model->password;
+    
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->photo = UploadedFile::getInstance($model, 'photo');
 
@@ -141,9 +149,25 @@ class UserController extends Controller
                 $model->photo = $userPhoto;
             }
 
-            $model->save(false);
+            if ($model->password !== null) {
+                // Хешируем новый пароль и сохраняем его в поле password
+                $model->password = Yii::$app->security->generatePasswordHash($model->password);
+            } else {
+                // Если пароль не был изменен, восстанавливаем текущий хэш пароля
+                $model->password = $currentPassword;
+            }
+
+            if ($model->validate()) {
+                $model->save(false);
+            }
+            
             return $this->redirect('profile');
         }
+
+        $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password) ? $model->password : '';
+        // Устанавливаем расшифрованный пароль для отображения в поле формы
+        // $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password);
+        // $model->password = '';
 
         return $this->render('update', [
             'model' => $model,

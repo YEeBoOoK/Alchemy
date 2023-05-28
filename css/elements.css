@@ -1,91 +1,29 @@
-/* Элементы с этим id отоброжаются первым планом */
-#element {
-  z-index: 30;
-}
+#element {z-index: 30;}
+#element02 {z-index: 40;}
 
-#element02 {
-  z-index: 40;
-}
-
-.element,
-.treatment {
+.element {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.treatment {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.element .bg,
-.treatment .bg {
+.element .bg {
   width: 100%;
   height: 100%;
   background-position: left top;
   background-size: calc(8vw - 4px);
 }
 
-.element.fire .bg {
-  background-image: url("/web/img/fire.gif");
-}
-
-.element.water .bg {
-  background-image: url("/web/img/water.gif");
-}
-
-.element.fire.correct .bg {
-  background-image: url("../images/fires-correct.svg");
-}
-
-.element.water.correct .bg {
-  background-image: url("../images/waters-correct.svg");
-}
-
-.treatment.fire .bg {
-  background-color: rgba(81, 140, 179, 1);
-  background-image: url("/web/img/water.gif");
-  animation: scroll 6s linear infinite;
-}
-
-.treatment.water .bg {
-  background-color: #63393E;
-  background-image: url("../images/poison.svg");
-  animation: scroll 6s linear infinite;
-}
+.element.fire .bg {background-image: url("/web/img/fire.gif");}
+.element.water .bg {background-image: url("/web/img/water.gif");}
+.element.steam .bg {background-image: url("/web/img/steam.gif");}
+.element.wind .bg {background-image: url("/web/img/wind.gif");}
+.element.cloud .bg {background-image: url("/web/img/cloud.gif");}
+.element.magic .bg {background-image: url("/web/img/wow.gif");}
 
 @media(max-width:456px) {
-  .element .bg,
-  .treatment .bg {
-      /* width: 100%;
-      height: 100%;
-      background-position: left top; */
-      background-size: 13vw !important;
-  }
-}
+.element .bg {background-size: 13vw !important;}}
 
 @media (min-width: 300px) and (max-width: 991px) {
-  .element .bg,
-  .treatment .bg {
-      /* width: 100%;
-      height: 100%;
-      background-position: left top; */
-      /* background-size: calc(16vw - 4px); */
-      background-size: calc(14vw - 4px);
-  }
-}
-
-
-.element.magic .bg {
-  background-image: url("/web/img/wow.gif");
-}
-
-
-/* ПОБЕДА */
-.element.steam .bg {
-  background-image: url("/web/img/steam.gif");
-}
+.element .bg {background-size: calc(14vw - 4px);}}

@@ -8,7 +8,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Редактирование профиля';
 $this->params['breadcrumbs'][] = ['label' => 'Профиль', 'url' => ['profile']];
-// $this->params['breadcrumbs'][] = ['label' => $model->id_user, 'url' => ['view', 'id_user' => $model->id_user]];
+// $this->params['breadcrumbs'][] = ['label' => $model->id_user, 'url' => ['view', 'id_user' => Html::encode($model->id_user)]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="user-update bg-form">
@@ -25,12 +25,17 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'passwordConfirm')->passwordInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt mb-2']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+    <script>
+        window.onload = function() {
+            var newUrl = 'https://dp-osmanova.сделай.site/update';
+            window.location.href = newUrl;
+        };
+    </script>
 
 </div>

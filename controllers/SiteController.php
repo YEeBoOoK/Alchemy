@@ -81,10 +81,6 @@ class SiteController extends Controller
             // return $this->goBack();
             return $this->redirect(['/user/profile']);
         }
-        // if ($model->load($this->request->post()) && $model->save()) {
-        //     Yii::$app->user->login($model);
-            
-        // }
 
         $model->password = '';
         return $this->render('login', [

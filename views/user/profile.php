@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = 'Профиль';
     
 
     $id_user = Yii::$app->user->identity->id_user;
+    
 
     $users = User::find()->where(['id_user' => $id_user])->all();
     
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = 'Профиль';
     foreach ($users as $user) {
         echo '<div class="row  py-2 user-data-bg">
                 <div class="col-lg-4 text-center">
-                    <img class="user-photo" src="'.$user->photo.'" alt="Ваше фото">
+                    <img class="user-photo" src="'.Html::encode($user->photo).'" alt="Ваше фото">
                 </div>
                 <div class="col-lg-6 pt-2">
                     <table class="table table-borderless">
@@ -39,13 +40,13 @@ $this->params['breadcrumbs'][] = 'Профиль';
                         <tr>
                             <th scope="row"></th>
                             <td class="user-data">Username:</td>
-                            <td class="user-data">'.$user->username.'</td>
+                            <td class="user-data">'.Html::encode($user->username).'</td>
                         </tr>
 
                         <tr>
                             <th scope="row"></th>
                             <td class="user-data">Email:</td>
-                            <td class="user-data">'.$user->email.'</td>
+                            <td class="user-data">'.Html::encode($user->email).'</td>
                         </tr>
 
                         <tr>

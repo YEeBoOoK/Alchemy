@@ -28,13 +28,15 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_k
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/web/icon.svg']);?>
 
 <?php $this->beginPage() ?>
+
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
     <!-- Заголовок, отображающийся на вкладке -->
     <title><?= Html::encode($this->title) ?></title>
     <link rel="icon" href="/web/icon.svg">      
-    <?php $this->head() ?>
+    <?php $this->head() ?> 
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -48,9 +50,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
                 trackLinks:true,
                 accurateTrackBounce:true
         });
+
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/93671346" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+    <noscript><div><img src="https://mc.yandex.ru/watch/93671346" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
 </head>
 <body class="d-flex flex-column h-100">
 
@@ -71,13 +73,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     ]);
     
     $items = [];
-    // $level = Level::findOne($id_level);
-    // $level = $dataProvider->getModels();
-    // $id_level = 1;
-    // $id_level = Yii::$app->request->get('id_level');
-
-    // $level = Level::find()->where(['user_id' => $user_id], )
-
     
     if (Yii::$app->user->isGuest){
         $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];

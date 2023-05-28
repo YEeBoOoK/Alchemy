@@ -56,11 +56,18 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validatePassword($this->password)) {
+            // if (!$user || !$user->validatePassword($this->password)) {
+            //     $this->addError($attribute, 'Неправильный логин или пароль');
+            // }
+
+            if ($user && Yii::$app->security->validatePassword($this->password, $user->password)) {
+                return Yii::$app->user->login($user, $this->rememberMe ? 3600*24*30 : 0);
+            } else {
                 $this->addError($attribute, 'Неправильный логин или пароль');
             }
         }
     }
+    
 
     /**
      * Logs in a user using the provided username and password.
