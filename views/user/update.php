@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap5\ActiveForm;
+use app\models\User;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\User $model */
@@ -11,6 +14,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Профиль', 'url' => ['profil
 // $this->params['breadcrumbs'][] = ['label' => $model->id_user, 'url' => ['view', 'id_user' => Html::encode($model->id_user)]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
+
 <div class="user-update bg-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -30,12 +34,5 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     </div>
 
     <?php ActiveForm::end(); ?>
-
-    <script>
-        window.onload = function() {
-            var newUrl = 'https://dp-osmanova.сделай.site/update';
-            window.location.href = newUrl;
-        };
-    </script>
 
 </div>

@@ -41,10 +41,12 @@ class UserController extends Controller
             $this->redirect(['site/login']);
             return false;
         } 
-        // Запрещаю доступ (гостям и) зарегистрированным пользователям к странице с данными пользователей
-        // if ((Yii::$app->user->isGuest || Yii::$app->user->identity->admin == 0 || Yii::$app->user->identity->admin==1) && ($action->id == 'index')) {
-        //     return $this->redirect(['site/login']);
-        // } else return true;
+
+        if ((Yii::$app->user->isGuest) && ($action->id == 'update')) {
+            $this->redirect(['site/login']);
+            return false;
+        } 
+
         if ($action->id === 'index') {
             return $this->redirect(['site/login']);
         } else return true;
@@ -133,8 +135,29 @@ class UserController extends Controller
      */
     public function actionUpdate($id_user)
     {
-        $model = $this->findModel($id_user);
+        // $model = $this->findModel($id_user);
+        // $user= Yii::$app->user->identity->id_user;
+
+        // if ($model->id_user !== $user) {
+        //     return $this->redirect('/update?id_user='.$user);
+        // }
+        // if (!$model->id_user) {
+        //     return $this->redirect('/update?id_user='.$user);
+        // }
+        $model = User::findOne($id_user);
+        $user = Yii::$app->user->identity->id_user;
+
+        if (!$model) {
+            return $this->redirect('/update?id_user='.$user);
+        }
+
+        if ($model->id_user !== $user) {
+            return $this->redirect('/update?id_user='.$user);
+        }
+
         $time = time();
+
+
 
         $userPhoto = $model->photo;
         $currentPassword = $model->password;
