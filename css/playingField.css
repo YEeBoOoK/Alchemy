@@ -249,7 +249,7 @@ button#next {
         font-size: 85%;
     }
     
-    #css {height: 365px;}
+    #css {height: 400px;}
 }
 @media (min-width: 435px) and (max-width: 454px) {
     #board {
@@ -273,7 +273,7 @@ button#next {
         font-size: 85%;
     }
 
-    #css {height: 365px;}
+    #css {height: 400px;}
 }
 
 @media (min-width: 400px) and (max-width: 434px) {
@@ -285,7 +285,7 @@ button#next {
 
     #level-counter{font-size: 75%;}
 
-    #css {height: 365px;}
+    #css {height: 315px;}
 
     #editor, pre {
         line-height: 1.3;
@@ -293,6 +293,11 @@ button#next {
     }
 
     .element .bg, .treatment .bg {background-size: calc(16vw - 7px) !important;}
+
+    #code {
+        height: 16px;
+        font-size: 85%;
+    }
 }
 
 @media (min-width: 350px) and (max-width: 399px) {
@@ -303,8 +308,13 @@ button#next {
         min-height: 250px;
     }
 
+    #code {
+        height: 16px;
+        font-size: 75%;
+    }
+
     #level-counter{font-size: 75%;}
-    #css {height: 365px;}
+    #css {height: 315px;}
     #editor, pre {line-height: 1.3; font-size: 85%;}
 
     .element .bg, .treatment .bg {background-size: calc(16vw - 7px) !important;}
@@ -319,7 +329,11 @@ button#next {
     }
 
     #level-counter{font-size: 75%;}
-    #css {height: 365px;}
+    #code {
+        height: 16px;
+        font-size: 75%;
+    }
+    #css {height: 315px;}
 
     #editor, pre {line-height: 1.3; font-size: 85%;}
 

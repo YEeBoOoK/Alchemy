@@ -16,7 +16,11 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'Alchemy',
+            'cookieValidationKey' => 'H}xrk+IEG1<mwX}6*MBM',
+            'enableCsrfValidation' => true,
+            'csrfCookie' => [
+                'httpOnly' => true,
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -63,7 +67,7 @@ $config = [
                 'game/<id_level:\d+>' => 'level/game',
                 'profile' => 'user/profile',
                 'admin' => 'admin/index',
-                'directory' => 'site/directory',
+                'directory' => 'directory/index',
                 'register' => 'user/create',
                 'user' => 'user/index',
                 'update' => 'user/update',

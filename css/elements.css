@@ -1,5 +1,5 @@
 #element {z-index: 30;}
-#element02 {z-index: 40;}
+#element02 {position: relative; z-index: 40;}
 
 .element {
   position: relative;
@@ -18,6 +18,7 @@
 .element.fire .bg {background-image: url("/web/img/fire.gif");}
 .element.water .bg {background-image: url("/web/img/water.gif");}
 .element.steam .bg {background-image: url("/web/img/steam.gif");}
+.element.air .bg {background-image: url("/web/img/air.gif");}
 .element.wind .bg {background-image: url("/web/img/wind.gif");}
 .element.cloud .bg {background-image: url("/web/img/cloud.gif");}
 .element.magic .bg {background-image: url("/web/img/wow.gif");}

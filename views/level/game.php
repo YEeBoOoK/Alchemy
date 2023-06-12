@@ -25,6 +25,46 @@ echo '
         ->where(['id_level' => Level::find()->select('id_level')])
         ->orderBy(['id_level' => SORT_DESC])
         ->one();
+
+        // Определение текущего уровня по его id
+        $currentLevel = Level::find()
+            ->select('id_level')
+            ->where(['<=', 'id_level', $id_level])
+            ->count();
+
+        $nextLevel = Level::find()
+          ->select('id_level')
+          ->where(['>=', 'id_level', $id_level])
+          ->count();
+
+          if ($currentLevel == $totalLevel->id_level) {
+            $levelId = $totalLevel->id_level;
+          } else {
+            $levelId = Level::find()->select('id_level')->where(['>', 'id_level', $currentLevel])->orderBy(['id_level' => SORT_ASC])->limit(1)->scalar();
+          }
+        
+
+        // $previousLevelId = Level::find()->select('id_level')
+        // ->where(['<', 'id_level', $currentLevel])
+        // ->andWhere(['>', 'id_level', 0])
+        // ->orderBy(['id_level' => SORT_DESC])->limit(1)->scalar();
+
+        if ($currentLevel == 1) {
+            $previousLevelId = 1;
+        } else {
+            $previousLevelId = Level::find()
+                ->select('id_level')
+                ->where(['<', 'id_level', $currentLevel])
+                ->orderBy(['id_level' => SORT_DESC])
+                ->limit(1)
+                ->scalar();
+        }
+
+
+
+
+        // Определение общего количества записей в таблице Level
+        $totalLevels = Level::find()->count();
         
         $level = Level::find()->where(['id_level' => $id_level])->one();
 
@@ -38,7 +78,9 @@ echo '
         }
 
         echo "<script>
+                let previousLevelId = $previousLevelId;
                 let currentLevel = $id_level;
+                let levelId = $levelId;
                 let jsWin = '$winClass';
                 let removeClass = '$removeClass';
                 let lastLevel = $totalLevel->id_level;
@@ -48,7 +90,7 @@ echo '
           if ($level->id_level == $id_level) {
             $property = app\models\Property::findOne(['id_property' => $level->property_id]);
             echo '
-            <div id="instructions" class="text-instructions m-2" >' . $level->instruction . '</div>
+            <div id="instructions" class="text-instructions m-2" title="'.$property->name_property. ":" .$property->definition.'">' . $level->instruction . '</div>
             <div class="col">
               <section class="py-2">
                 <div id="board">
@@ -132,11 +174,11 @@ echo '
                         <!-- Индикатор уровня -->
                         <span id="level-indicator">
                           <!-- Текущий -->
-                          <span class="current" title="Текущий уровень">'.$level->id_level.'</span>
+                          <span class="current" title="Текущий уровень">'.$currentLevel.'</span>
                             <!-- Текст уровня -->
                             <span id="labelLevel">уровень из</span>
                             <!-- Всего -->
-                            <span class="total" title="Последний уровень">'.$totalLevel->id_level.'</span>
+                            <span class="total" title="Последний уровень">'.$totalLevels.'</span>
                         <!-- <span class="caret">▾</span> -->
                           </span>
                         
@@ -184,6 +226,6 @@ echo '
                 }
 
                 echo "<script>let correct = $is_correct;</script>";
-                echo '</div>';}}
-                echo "</section>";
+                echo '</div></section>';}}
+                echo "</div></div>";
 ?>

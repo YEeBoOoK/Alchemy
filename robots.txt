@@ -1,9 +1,31 @@
-User-agent: *
-Disallow: /user/
-Clean-param: sid /directory.php
-Clean-param: sid /index.php
-
-Crawl-delay: 10s
-
 User-agent: Yandex
 Disallow: /user/
+Allow: /css/*.css
+Allow: /js/*.js
+Allow: /img/*.jpg
+Allow: /img/*.jpeg
+Allow: /img/*.png
+Allow: /img/*.gif
+# Наиболее часто встречаемые метки для отслеживания рекламы
+Clean-param: utm_source&utm_medium&utm_term&utm_content&utm_campaign&yclid&gclid&_openstat&from /
+
+User-agent: Googlebot
+Disallow: /user/
+Allow: /css/*.css
+Allow: /js/*.js
+Allow: /img/*.jpg
+Allow: /img/*.jpeg
+Allow: /img/*.png
+Allow: /img/*.gif
+
+User-agent: *
+Disallow: /user/
+Allow: /css/*.css
+Allow: /js/*.js
+Allow: /img/*.jpg
+Allow: /img/*.jpeg
+Allow: /img/*.png
+Allow: /img/*.gif
+Clean-param: sid /directory.php
+Clean-param: sid /index.php
+Crawl-delay: 10

@@ -10,15 +10,17 @@ use yii\grid\GridView;
 /** @var app\models\PropertySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Инструкции';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Синтаксисы';
+// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
+$this->params['breadcrumbs'][] = 'Синтаксисы';
 ?>
 <div class="property-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить инструкцию', ['create'], ['class' => 'btn butt']) ?>
+        <?= Html::a('Добавить синтаксис', ['create'], ['class' => 'btn butt']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

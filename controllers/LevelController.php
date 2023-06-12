@@ -149,16 +149,27 @@ class LevelController extends Controller
      *
      * @return string
      */
-    public function actionGame($id_level)
-    {
-        // $level = Yii::$app->request->get('id_level');
-        $searchModel = new LevelSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+    // public function actionGame($id_level)
+    // {
+    //     // $level = Yii::$app->request->get('id_level');
+    //     $searchModel = new LevelSearch();
+    //     $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('game', [
-            // 'levels' => $levels,
-            'searchModel' => $searchModel,
+    //     return $this->render('game', [
+    //         // 'levels' => $levels,
+    //         'searchModel' => $searchModel,
+    //         'dataProvider' => $dataProvider,
+    //     ]);
+    // }
+
+    public function actionGame($id_level) 
+    { 
+        $searchModel = new LevelSearch(); 
+        $dataProvider = $searchModel->search($this->request->queryParams); 
+
+        return $this->render('game', [ 
+            'searchModel' => $searchModel, 
             'dataProvider' => $dataProvider,
-        ]);
+        ]); 
     }
 }

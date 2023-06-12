@@ -12,14 +12,14 @@ use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 use app\models\Level;
 
+use yii\web\View;
 
 AppAsset::register($this);
 
 $this->registerCsrfMetaTags();
 
-$this->params['meta_description'] = 'Alchemy CSS — это веб-приложение, позволяющее в игровой форме изучить CSS Grid'; // Описание
-$this->params['meta_keywords'] = 'CSS Grid, веб-приложение, grid-row, grid-column, z-index'; // Ключевые слова
-
+// $this->params['meta_description'] = 'Alchemy CSS — это веб-приложение, позволяющее в игровой форме изучить CSS Grid';
+// $this->params['meta_keywords'] = 'CSS Grid, веб-приложение, grid-row, grid-column, z-index, Игра CSS Grid, game CSS Grid, Веб-приложение для изучения CSS Grid, Alchemy CSS, Алхимия CSS';
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
@@ -36,9 +36,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     <title><?= Html::encode($this->title) ?></title>
     <link rel="icon" href="/web/icon.svg">      
     <?php $this->head() ?> 
-
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
+    <script>
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -52,9 +51,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
         });
 
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/93671346" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
+    <meta name="google-site-verification" content="DD0DJzxw1Zw-FmQV-lGOCwbRxgQ87y7k6Pd8WFMuDEs">
 </head>
+
 <body class="d-flex flex-column h-100">
+    <noscript><div><img src="https://mc.yandex.ru/watch/93671346" style="position:absolute; left:-9999px;" alt=""></div></noscript> 
 
 <!-- ЗАГРУЗКА СТРАНИЦЫ -->
     <div class="preloader">
@@ -75,7 +76,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     $items = [];
     
     if (Yii::$app->user->isGuest){
-        $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
+        $items[] = ['label' => 'Справочник', 'url' => ['/directory/index']];
         $items[] = ['label' => 'Поддержка', 'url' => ['/site/contact']];
         $items[] = ['label' => 'Регистрация', 'url' => ['/user/create']];
         $items[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
@@ -89,17 +90,40 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
             ->one();
 
         $totalLevel = Level::find()
-            ->where(['id_level' => Level::find()->select('id_level')])
             ->orderBy(['id_level' => SORT_DESC])
             ->one();
+
+        // if ($userResponse !== null) {
+        //     $levelId = Level::find()
+        //     ->select('id_level')
+        //     ->where(['>', 'id_level', $userResponse->level_id])
+        //     ->andWhere(['<=', 'id_level', $totalLevel->id_level])
+        //     ->orderBy(['id_level' => SORT_ASC])
+        //     ->limit(1)
+        //     ->scalar();
+        // }
+
+        if ($userResponse !== null && $userResponse->level_id < $totalLevel->id_level) {
+            $levelId = Level::find()
+            ->select('id_level')
+            ->where(['>', 'id_level', $userResponse->level_id])
+            ->andWhere(['<=', 'id_level', $totalLevel->id_level])
+            ->orderBy(['id_level' => SORT_ASC])
+            ->limit(1)
+            ->scalar();
+        } else if ($userResponse !== null && $userResponse->level_id = $totalLevel->id_level) {
+            $levelId = $totalLevel->id_level;
+        }
+        
+
 
         if(Yii::$app->user->identity->admin==1){
             $items[] = ['label' => 'Административная панель', 'url' => ['/admin/index']];
             $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
-            $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
-            if ((($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) <= $totalLevel->id_level)) {
+            $items[] = ['label' => 'Справочник', 'url' => ['/directory/index']];
+            if (($userResponse !== null) && (($nextLevel = $levelId) <= $totalLevel->id_level)) {
                 $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
-            } else if (($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) > $totalLevel->id_level) {
+            } else if (($userResponse !== null) && (($nextLevel = $levelId) >= $totalLevel->id_level)) {
                 $nextLevel = $totalLevel->id_level;
                 $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
             } else {
@@ -108,10 +132,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
             }
         } else {
             $items[] = ['label' => 'Профиль', 'url' => ['/user/profile']];
-            $items[] = ['label' => 'Справочник', 'url' => ['/site/directory']];
-            if ((($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) <= $totalLevel->id_level)) {
+            $items[] = ['label' => 'Справочник', 'url' => ['/directory/index']];
+            if (($userResponse !== null) && (($nextLevel = $levelId) <= $totalLevel->id_level)) {
                 $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
-            } else if (($userResponse !== null) && ($nextLevel = $userResponse->level_id + 1) > $totalLevel->id_level) {
+            } else if (($userResponse !== null) && (($nextLevel = $levelId) >= $totalLevel->id_level)) {
                 $nextLevel = $totalLevel->id_level;
                 $items[] = ['label' => 'Играть', 'url' => ['level/game', 'id_level' => $nextLevel]];
             } else {
@@ -139,7 +163,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
     ?>
 </header>
 
-<main id="main" class="flex-shrink-0" role="main">
+<main id="main" class="flex-shrink-0">
     <div class="container">
         <?php if (!empty($this->params['breadcrumbs'])): ?>
             <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
@@ -181,7 +205,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/w
             </div>
 
             <div class="col-lg-2 text-end">
-                <button class="cookie_butt" id="cookie_alert-close">Принять</button>   
+                <button class="cookie_butt" id="cookie_alert-close">Понятно</button>   
             </div>
         </div>
 

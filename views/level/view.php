@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Level $model */
 
 $this->title = $model->name_level;
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Уровни', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -33,7 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'name_level',
             'instruction:ntext',
             // 'property_id',
-            ['attribute'=>'Объяснение', 'value'=> function($data){return $data->getProperty()->One()->name_property;}],
+            ['attribute'=>'Объяснение', 
+            // 'value'=> function($data){return $data->getProperty()->One()->name_property;}
+                'value' => function ($data) {
+                    $property = $data->getProperty()->one();
+                    return $property ? $property->name_property : 'Выберите значение';
+                }
+            ],
+            
             'class',
             'class2',
             'style',

@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\LevelAnswer $model */
 
 $this->title = $model->answer;
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Ответы на уровни', 'url' => ['index?sort=-level_id']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

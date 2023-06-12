@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /** @var app\models\Property $model */
 
 $this->title = $model->name_property;
-$this->params['breadcrumbs'][] = ['label' => 'Инструкции', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Синтаксисы', 'url' => ['index?sort=-id_property']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

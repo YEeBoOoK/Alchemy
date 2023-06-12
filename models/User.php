@@ -40,8 +40,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['admin'], 'integer'],
             [['email', 'username', 'password'], 'string', 'max' => 255],
             [['email'], 'unique', 'message' => 'Данный email-адрес уже используется'],
+            ['email', 'email', 'message' => 'Введите корректный email-адрес (например: test@gmail.com)'],
             [['username'], 'unique', 'message' => 'Данное имя пользователя уже занято'],
-            [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9_-]{5,}$/', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита, цифры, дефисы и подчеркивания'],
+            [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9_-]{4,}$/', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита, можно использовать цифры, дефисы и подчеркивания. Минимум 4 символов'],
 
             [['photo'], 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 5*1024*1024, 'skipOnEmpty' => true, 'message' => 'Разрешенные типы файла: png, jpg, gif, jpeg. Максимальный допустимый размер файла 5 МБ'],
         ];

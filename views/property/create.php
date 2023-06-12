@@ -5,8 +5,9 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Property $model */
 
-$this->title = 'Добавить инструкцию';
-$this->params['breadcrumbs'][] = ['label' => 'Инструкции', 'url' => ['index']];
+$this->title = 'Добавить синтаксис';
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Синтаксисы', 'url' => ['index?sort=-id_property']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="property-create bg-form">

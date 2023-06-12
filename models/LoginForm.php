@@ -16,6 +16,7 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
+    public $verifyCode;
 
     private $_user = false;
 
@@ -32,6 +33,9 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['verifyCode', 'captcha'],
+
+            [['username'], 'match', 'pattern' => '/^[a-zA-Z0-9_-]{5,}$/', 'message' => 'Имя пользователя может содержать только буквы латинского алфавита, можно использовать цифры, дефисы и подчеркивания. Минимум 5 символов'],
         ];
     }
 
@@ -41,6 +45,7 @@ class LoginForm extends Model
             'username' => 'Username',
             'password' => 'Пароль',
             'rememberMe' => 'Запомнить меня',
+            'verifyCode' => 'Введите текст с картинки',
         ];
     }
 

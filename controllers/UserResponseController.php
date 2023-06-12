@@ -108,9 +108,10 @@ class UserResponseController extends Controller
                 $is_correct = 1;
                 break;
             }
-    }
-
-    return json_encode(['is_correct' => $is_correct]);
+        }
+        
+        return json_encode(['is_correct' => $is_correct]);
+        
     }
     
 

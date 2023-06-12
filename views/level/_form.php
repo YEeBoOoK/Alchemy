@@ -11,14 +11,19 @@ use yii\bootstrap5\ActiveForm;
 <div class="level-form">
 
     <?php $form = ActiveForm::begin(); 
-    $li=[]; $properties=\app\models\Property::find()->all();
-    foreach ($properties as $property)
-    {
-        $li[$property->id_property]=$property->name_property;
+    // $li=[]; $properties=\app\models\Property::find()->all();
+    // foreach ($properties as $property)
+    // {
+    //     $li[$property->id_property]=$property->name_property;
+    // }
+    $li = [];
+    $properties = \app\models\Property::find()->all();
+    $li[null] = ''; // Добавляем пустое значение в массив
+    foreach ($properties as $property) {
+        $li[$property->id_property] = $property->name_property;
     }
     ?>
     
-
     <?= $form->field($model, 'name_level')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'instruction')->textarea(['rows' => 6]) ?>

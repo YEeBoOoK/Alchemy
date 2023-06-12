@@ -10,6 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\LevelSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
 $this->title = 'Уровни';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -32,7 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_level',
             'name_level',
             'instruction:ntext',
-            'property_id',
+            // 'property_id',
+            ['attribute'=>'Объяснение', 
+            // 'value'=> function($data){return $data->getProperty()->One()->name_property;}
+                'value' => function ($data) {
+                    $property = $data->getProperty()->one();
+                    return $property ? $property->name_property : 'Отсутствует';
+                }
+            ],
             //'class',
             //'class2',
             //'style',

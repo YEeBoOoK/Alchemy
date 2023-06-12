@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?> -->
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn butt mb-2']) ?>

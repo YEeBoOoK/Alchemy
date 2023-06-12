@@ -128,13 +128,16 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    /**
-     * Displays directory page.
-     *
-     * @return string
-     */
-    public function actionDirectory()
+    public function actionError()
     {
-        return $this->render('directory');
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            return $this->render('error', [
+                'exception' => $exception,
+                'title' => 'УууУУу, это 404',
+                'message' => 'Косячник',
+            ]);
+        }
     }
+
 }

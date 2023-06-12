@@ -1,15 +1,14 @@
 // ПЕРЕХОД НА УРОВНИ ПО СТРЕЛОЧКАМ 
 function back() {
-    let newLevel = currentLevel;
-    newLevel = currentLevel - 1;
+    let newLevel = previousLevelId;
+    newLevel = previousLevelId;
     if (newLevel > 0) {
         window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
     }
 };
 
 function next() {
-    let newLevel = currentLevel;
-    newLevel = currentLevel + 1;
+    let newLevel = levelId;
     if (newLevel <= lastLevel && correct === 1) {
         window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
     }
@@ -47,7 +46,7 @@ function addAnswer(level_id, style) {
         if (сorrect === 1 && level_id !== lastLevel) {
             animate();
             title.innerText = 'Информационное сообщение';
-            body.innerHTML = '<p>Все верно, Вы гений, не иначе</p>';
+            body.innerHTML = '<p>Отлично! Уровень пройден!</p>';
             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
             answerCorrect();
             setTimeout(() => {     
@@ -56,7 +55,7 @@ function addAnswer(level_id, style) {
         } else if (сorrect === 1 && level_id === lastLevel) {
             animate();
             title.innerText = 'Информационное сообщение';
-            body.innerHTML = '<p>Все верно, Вы гений, не иначе. <br> На данный момент, Вы выполнили последний уровень! Похвалите себя и возвращайтесь позже</p>';
+            body.innerHTML = '<p>Отлично сыграно! Уровень пройден!<br> На данный момент, Вы выполнили последний уровень! Похвалите себя и возвращайтесь позже</p>';
             let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
             theEnd();
             setTimeout(() => {     
@@ -75,7 +74,7 @@ function addAnswer(level_id, style) {
 function answerCorrect() {
     var close = document.getElementById("close");
     close.addEventListener("click", function() { 
-        let newLevel = currentLevel + 1;
+        let newLevel = levelId;
         window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
     });
 }
@@ -93,14 +92,16 @@ function applyStyle() {
 
 // ФУНКЦИЯ ДЛЯ КНОПКИ "ДАЛЬШЕ" НА УЖЕ ПРОЙДЕННЫХ ПОЛЬЗОВАТЕЛЕМ УРОВНЯХ
 function nextLevel() {
-    let newLevel = currentLevel + 1;
+    let newLevel = levelId;
     window.location.href = 'https://dp-osmanova.сделай.site/game/' + newLevel;
 }
 
 // АНИМАЦИЯ, КОТОРАЯ ПОЯВЛЯЕТСЯ ПРИ ВЕРНОМ ОТВЕТЕ ПОЛЬЗОВАТАЛЯ И МЕНЯЕТ КЛАСС НА "ПОЛУЧИВШИЙСЯ ЭЛЕМЕНТ"
 function animate() {
     let element2 = document.getElementById('element2');
-    element2.classList.remove(removeClass);
+    let classesToRemove = removeClass.split(' '); // Разделение строки на классы
+    let firstClass = classesToRemove[0]; // Получение первого класса
+    element2.classList.remove(firstClass); // Удаление первого класса
     element2.classList.add('magic');
     setTimeout(() => {        
         element2.classList.remove('magic');

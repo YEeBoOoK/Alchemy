@@ -5,7 +5,9 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\LevelAnswer $model */
 
-$this->title = 'Редактировать ответ на уровень №' . $model->level_id;
+$this->title = 'Редактировать ответ на уровень ' . $model->level->name_level;
+
+$this->params['breadcrumbs'][] = ['label' => 'Административная панель', 'url' => ['admin/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Ответы на уровни', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактирование';

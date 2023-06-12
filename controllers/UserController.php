@@ -49,7 +49,7 @@ class UserController extends Controller
 
         if ($action->id === 'index') {
             return $this->redirect(['site/login']);
-        } else return true;
+        } return true;
     }
 
 
@@ -134,30 +134,21 @@ class UserController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id_user)
-    {
-        // $model = $this->findModel($id_user);
-        // $user= Yii::$app->user->identity->id_user;
-
-        // if ($model->id_user !== $user) {
-        //     return $this->redirect('/update?id_user='.$user);
-        // }
-        // if (!$model->id_user) {
-        //     return $this->redirect('/update?id_user='.$user);
-        // }
+    {   
         $model = User::findOne($id_user);
         $user = Yii::$app->user->identity->id_user;
 
         if (!$model) {
-            return $this->redirect('/update?id_user='.$user);
+            // return $this->redirect('/update?id_user='.$user);
+            return $this->redirect(['update', 'id_user' => $user]);
         }
 
         if ($model->id_user !== $user) {
-            return $this->redirect('/update?id_user='.$user);
+            // return $this->redirect('/update?id_user='.$user);
+            return $this->redirect(['update', 'id_user' => $user]);
         }
 
         $time = time();
-
-
 
         $userPhoto = $model->photo;
         $currentPassword = $model->password;
@@ -172,13 +163,13 @@ class UserController extends Controller
                 $model->photo = $userPhoto;
             }
 
-            if ($model->password !== null) {
-                // Хешируем новый пароль и сохраняем его в поле password
-                $model->password = Yii::$app->security->generatePasswordHash($model->password);
-            } else {
-                // Если пароль не был изменен, восстанавливаем текущий хэш пароля
-                $model->password = $currentPassword;
-            }
+            // if ($model->password !== null) {
+            //     // Хешируем новый пароль и сохраняем его в поле password
+            //     $model->password = Yii::$app->security->generatePasswordHash($model->password);
+            // } else {
+            //     // Если пароль не был изменен, восстанавливаем текущий хэш пароля
+            //     $model->password = $currentPassword;
+            // }
 
             if ($model->validate()) {
                 $model->save(false);
@@ -187,10 +178,10 @@ class UserController extends Controller
             return $this->redirect('profile');
         }
 
-        $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password) ? $model->password : '';
-        // Устанавливаем расшифрованный пароль для отображения в поле формы
-        // $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password);
-        // $model->password = '';
+        // $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password) ? $currentPassword : '';
+        // $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password) ? Yii::$app->security->validatePassword($currentPassword, $currentPassword) : '';
+        // $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password) ? $model->password : '';
+        // $model->password = Yii::$app->security->validatePassword($currentPassword, $model->password) ? Yii::$app->security->generatePasswordHash($currentPassword) : '';
 
         return $this->render('update', [
             'model' => $model,

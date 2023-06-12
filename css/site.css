@@ -18,15 +18,17 @@
   top: 0;
   right: 0;
   bottom: 0;
-  overflow: hidden;
+  /* overflow: hidden !important; */
   background: #2E222F;
-  z-index: 5000;
+  z-index: 1031;
 }
+
+/* .loaded_hiding .preloader::-webkit-scrollbar {display: none !important;} */
 
 .preloader__image {
   position: relative;
-  top: 40%;
-  left: 45%;
+  top: 50%;
+  left: 50%;
   width: 150px;
   height: 200px;
   background: url('/web/img/magic.gif') no-repeat 50% 50%; /*расположение (url) изображения gif и др. параметры*/
@@ -40,11 +42,50 @@
 .loaded .preloader {display: none;}
 
 
+/* MEDIA */
+@media (min-width: 1001px) and (max-width: 1920px) {
+  .preloader__image {
+    top: 40%;
+    left: 45%;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1000px) {
+  .preloader__image {
+    top: 35%;
+    left: 40%;
+  }
+}
+@media (min-width: 577px) and (max-width: 720px) {
+  .preloader__image {
+    top: 30%;
+    left: 35%;
+  }
+}
+@media (min-width: 351px) and (max-width: 576px) {
+  .preloader__image {
+    top: 25%;
+    left: 30%;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 350px) {
+  .preloader__image {
+    top: 30%;
+    left: 25%;
+  }
+}
+
+
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!  ОБЩИЕ СТИЛИ САЙТА !!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
 main > .container {padding: 70px 15px 20px;}
+
+/* ::-webkit-scrollbar {
+  display: block;
+} */
 
 /* Тело */
 body {
@@ -58,6 +99,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'pixel', sans-serif;
+  overflow-x: hidden;
 }
 
 @media (min-width: 961px) and (max-width: 1920px) {
@@ -147,8 +189,17 @@ li.breadcrumb-item.active {color: #cecece;}
     /* Так надо, чтобы не затрагивать стили */
     margin-left: 0rem !important;
     margin-right: 0rem !important;
-    padding-left: 0rem !important;
-    padding-right: 0rem !important;
+    /* padding-left: 0rem !important;
+    padding-right: 0rem !important; */
+}
+
+#loginform-verifycode-image, #contactform-verifycode-image {
+  margin: 0px 0px 10px 0px !important;
+}
+
+input#loginform-verifycode {
+  width: 50% !important;
+  margin: 5px 0px 0px 0px !important;
 }
 
 .bg-form {background-color: #0c09139a; padding: 15px; margin: 0 auto;}
@@ -182,14 +233,21 @@ div.text p {font-size: calc(10px + 8 * (100vw / 1280));}
 
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!! DIRECTORY.PHP !!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!! DIRECTORY !!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
-.accordion {background-color: rgba(255, 255, 255, 0.8) !important;}
-.accordion-header {background-color: rgba(255, 255, 255, 0.8) !important;}
-.accordion-button:not(.collapsed) {color: #000 !important; fill: #fff !important;}
 .directory-photo {width: 800px; max-width: 100%; height: auto;}
-.accordion-body code {font-size: 0.875em; color: #ad0000;word-wrap: break-word;}
+.square-photo {width: 500px; max-width: 100%; height: auto;}
+.card {background-color: #0000008f !important;}
+.card-footer {border-top: solid #fff4f412 !important;}
+
+.bg-content {background-color: #0c09139a; padding: 15px; margin: 0 auto;}
+
+pre code {color: #bbbbbb; font-size: calc(7px + 7 * (100vw / 1280));}
+
+/* @media (min-width: 300px) and (max-width: 500px) { 
+  .square-photo {width: px; max-width: 100%; height: auto;}
+} */
 
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -208,8 +266,15 @@ div.text p {font-size: calc(10px + 8 * (100vw / 1280));}
 .user-photo {
   width: 500px;
   max-width: 100%;
-  height: auto;
+  max-height: 100%;
+  height: 400px;
+  object-fit: cover;
 }
+
+@media (min-width: 300px) and (max-width: 991px) { 
+  .photo-alignment {text-align: center !important;}
+}
+
 
 .user-data-bg {background-color: #120c1d70;}
 .user-data{font-size: calc(9px + 7 * (100vw / 1280));}
@@ -265,7 +330,7 @@ tr td.user-data {font-size: calc(9px + 7 * (100vw / 1280));}
   padding: 0.4em 0.8em;
   border: none;
   border-radius: 4px;
-  font-size: calc(7px + 7 * (100vw / 1280));
+  /* font-size: calc(7px + 7 * (100vw / 1280)); */
   line-height: 30px;
   transition: 1.2s;
 }
@@ -304,7 +369,7 @@ tr td.user-data {font-size: calc(9px + 7 * (100vw / 1280));}
   max-width: 90%;
   transform: translateX(-50%);
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.699);
+  background-color: rgba(255, 255, 255, 0.900);
   border-radius: 4px;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
 }

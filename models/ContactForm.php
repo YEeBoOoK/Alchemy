@@ -60,43 +60,15 @@ class ContactForm extends Model
     {
         if ($this->validate()) {
             $message = Yii::$app->mailer->compose()
-                ->setTo($email)
-           //  ->setTo('test-t07z8k4z3@srv1.mail-tester.com')
-           //     ->setTo('forestmarket@yandex.ru')
-                // ->setFrom('admin@osmanova.xn--80ahdri7a.site')
-                ->setFrom([$this->email => $this->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body);
+                ->setTo($email) /* Куда */
+                ->setFrom([$this->email => $this->name]) /* От кого */
+                ->setSubject($this->subject) /* Имя отправителя */
+                ->setTextBody($this->body); /* Сообщение */
 
             if ($message->send()) {
                 return true;
             }
         }
         return false;
-
-        // if ($this->validate()) {
-        //     $message = Yii::$app->mailer->compose()
-        //         ->setTo($email)
-        //         ->setFrom([$this->email => $this->name])
-        //         // ->setReplyTo([$this->email => $this->name])
-        //         ->setSubject($this->subject)
-        //         ->setTextBody($this->body);
-                
-        //         if ($message->send())  return true;
-        // }
-        // return false;
-
-        // if ($this->validate()) {    
-        //     Yii::$app->mailer->compose() 
-        //         ->setFrom([$this->email => $this->name]) /* от кого */
-        //         ->setTo($email) /* куда */
-        //         ->setSubject($this->subject) /* имя отправителя */
-        //         ->setTextBody($this->body) /* текст сообщения */
-        //         ->send(); /* функция отправки письма */
-
-        //     return true;
-        // } else {
-        //     return false;
-        // }
     }
 }
